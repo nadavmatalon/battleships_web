@@ -91,6 +91,17 @@ describe Board do
 		expect(board.sunk_ships_count).to eq 1
 	end
 
+ 	it "cannot attack the same coordinate twice" do
+		board.attack(:A1)
+		expect(board.attack(:A1)).to eq nil
+ 	end
+
+ 	it "knows which coordinates were attacked" do
+		board.attack(:A1)
+		expect(board.attacked?(:A1)).to be_true
+		expect(board.attacked?(:A2)).to be_false 		
+ 	end
+
 end
 
 

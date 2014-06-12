@@ -7,6 +7,7 @@ class Board
 
 	def initialize(ships = [])
 		@ships = ships
+		@attacked_cooridnates = []
 	end
 
 	def ships
@@ -30,7 +31,12 @@ class Board
 	end
 
 	def attack coordinate
-			attacked_ship(coordinate).hit(coordinate) if successful_attack_on?(coordinate)
+		attacked_cooridnates << coordinate if valid? coordinate
+		attacked_ship(coordinate).hit coordinate if successful_attack_on? coordinate
+	end
+
+	def attacked_cooridnates
+		@attacked_cooridnates
 	end
 
 	def successful_attack_on? coordinate
@@ -55,6 +61,14 @@ class Board
 
 	def sunk_ships
 		ships.select {|ship| ship.sunk?}
+	end
+
+	def attacked? coordinate
+		(attacked_cooridnates & [coordinate]).any?
+	end
+
+	def valid? coordinate
+		Coordinate.new(coordinate).valid?
 	end
 
 end
