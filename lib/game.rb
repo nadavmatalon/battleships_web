@@ -3,9 +3,17 @@ require_relative "player"
 class Game
 
 	def initialize
+		set_up_players
+	end
+
+	def set_up_players
+		create_players
+		add_players_to_game
+	end
+
+	def create_players
 		create_player_one
 		create_player_two
-		add_players_to_game
 	end
 
 	def players
