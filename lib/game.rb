@@ -2,8 +2,11 @@ require_relative "player"
 
 class Game
 
+	SUNK_SHIPS_TO_WIN = 1
+
 	def initialize
 		set_up_players
+		@current_turn = player_one
 	end
 
 	def set_up_players
@@ -38,6 +41,35 @@ class Game
 
 	def add_players_to_game
 		players.push(player_one, player_two)
+	end
+
+	def current_turn
+		@current_turn
+	end
+
+	def switch_turn
+		@current_turn = other_player
+	end
+
+	def over?
+		player_one.sunk_ships_count == SUNK_SHIPS_TO_WIN ||
+		player_two.sunk_ships_count == SUNK_SHIPS_TO_WIN
+	end
+
+	def other_player
+		current_turn == player_one ? @other_player = player_two : @other_player = player_one
+	end
+
+	def place ship
+		current_turn.place ship
+	end
+
+	def attack coordinate
+		other_player.attack coordinate
+	end
+
+	def winner
+		current_turn
 	end
 
 end
