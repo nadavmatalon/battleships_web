@@ -30,6 +30,13 @@ class Player
 		board.attacked? coordinate
 	end
 
+	def sunk_ships
+		board.sunk_ships
+	end
+
+	def sunk_ships_count
+		sunk_ships.count
+	end
 
 end
 

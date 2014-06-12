@@ -30,7 +30,6 @@ describe Player do
 	it "can place a ship on the board" do
 		player.place(battleship)
 		expect(player.ships).to eq [battleship]
-		expect(player.ship_count).to eq 1
 	end
 
 	it "can attack a specific coordinate on the board" do
@@ -45,7 +44,28 @@ describe Player do
 		expect(player.attacked?(:A2)).to be_false
 	end
 
+	it "knows how many ships are on the board" do
+		player.place(submarine)
+		player.place(battleship)
+		expect(player.ship_count).to eq 2		
+	end
+
+	it "knows which ships sunk" do
+		player.place(submarine)
+		player.place(battleship)
+		player.attack(:A1)
+		expect(player.sunk_ships).to eq [submarine]
+	end
+
+	it "knows how many ships have sunk" do
+		player.place(submarine)
+		player.place(battleship)
+		player.attack(:A1)
+		expect(player.sunk_ships_count).to eq 1
+	end
 end
+
+
 
 
 

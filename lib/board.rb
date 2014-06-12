@@ -31,7 +31,7 @@ class Board
 	end
 
 	def attack coordinate
-		attacked_cooridnates << coordinate if valid? coordinate
+		attacked_cooridnates << coordinate if valid?(coordinate) && !attacked?(coordinate)
 		attacked_ship(coordinate).hit coordinate if successful_attack_on? coordinate
 	end
 
@@ -44,7 +44,7 @@ class Board
 	end
 
 	def attacked_ship coordinate
-		identify_ship_by(coordinate)
+		identify_ship_by coordinate
 	end
 
 	def identify_ship_by coordinate
