@@ -60,8 +60,14 @@ class Game
 		current_turn == player_one ? @other_player = player_two : @other_player = player_one
 	end
 
+	def current_player
+		@current_turn
+	end
+
 	def place ship
-		current_turn.place ship
+		ship_count = current_player.ship_count
+		current_player.place ship
+		current_player.ship_count == ship_count + 1
 	end
 
 	def attack coordinate

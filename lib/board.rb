@@ -1,3 +1,4 @@
+require_relative "ship"
 require_relative "submarine"
 require_relative "destroyer"
 require_relative "cruiser"
@@ -36,7 +37,7 @@ class Board
 	end
 
 	def attacked_cooridnates
-		@attacked_cooridnates
+		@attacked_cooridnates.sort!
 	end
 
 	def successful_attack_on? coordinate

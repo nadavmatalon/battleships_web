@@ -2,10 +2,12 @@ require_relative "coordinate"
 
 class Coordinates
 
-	attr_reader :locations
-
 	def initialize(*args)
 		@locations = args.sort!
+	end
+
+	def locations
+		@locations ||= []
 	end
 
 	def valid?

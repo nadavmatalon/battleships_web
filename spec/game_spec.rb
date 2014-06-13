@@ -40,6 +40,11 @@ describe Game do
 		expect(game.winner).to eq game.player_two
 	end
 
+	it "knows if placing of a ship is successful" do
+		expect(game.place(submarine)).to be_true
+		expect(game.place(submarine)).to be_false
+	end
+
 end
 
 

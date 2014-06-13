@@ -44,6 +44,12 @@ describe Player do
 		expect(player.attacked?(:A2)).to be_false
 	end
 
+	it "knows all coordinates that were attacked" do
+		player.attack(:A5)
+		player.attack(:A1)
+		expect(player.attacked_coordinates).to eq [:A1, :A5]
+ 	end
+
 	it "knows how many ships are on the board" do
 		player.place(submarine)
 		player.place(battleship)
@@ -63,6 +69,7 @@ describe Player do
 		player.attack(:A1)
 		expect(player.sunk_ships_count).to eq 1
 	end
+
 end
 
 

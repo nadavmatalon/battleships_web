@@ -102,6 +102,12 @@ describe Board do
 		expect(board.attacked?(:A2)).to be_false 		
  	end
 
+ 	it "knows which coordinates were attacked" do
+		board.attack(:A5)
+		board.attack(:A1)
+		expect(board.attacked_cooridnates).to eq [:A1, :A5]
+ 	end
+
 end
 
 
