@@ -10,7 +10,7 @@
 
 		<form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
 	
-			<table border="0px" width="200px">
+			<table border="0px" width="200px" height="50">
 				<tr>
 					<td>
 						<select id="selected_ship" name="selected_ship" onChange="ship_size=this.value; ship_type.value=this.options[this.selectedIndex].text;">
@@ -21,7 +21,7 @@
 						</select>
 					</td>
 					<td>
-						<input type='submit' name='submit' value='submit' onclick=""><br/>
+						<input type="submit" id="submit" name="submit" value="submit" onclick=""><br/>
 					</td>
 				</tr>
 			</table>	

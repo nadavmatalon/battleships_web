@@ -142,7 +142,7 @@ end
 post '/player_attack' do	
 	attack_result = game.attack(params[:attack_coord].to_sym)
 	if game.over?
-		session[:message]= "GAME_OVER! THE WINNER IS #{current_player_name.upcase}"	
+		session[:message]= "GAME_OVER! #{current_player_name.upcase} IS THE WINNER!"	
 		redirect '/end_game'
 	else		
 		session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	

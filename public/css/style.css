@@ -1,12 +1,27 @@
 
+body {
+   line-height: 22px;
+   font-family: monospace;
+   font-size: 15px;
+   letter-spacing: 0px;
+
+
+}
+
 h1 {
 	font-style: bold;
 	color: blue;
-	font-size: 40px;
+	font-size: 55px;
+	font-family: monospace;
+	letter-spacing: 3px;
+
 }
 
 h2 {
-	font-size: 15px;
+  line-height: 22px;
+   font-family: monospace;
+   font-size: 15px;
+   letter-spacing: 0px;
 }
 
 .legend {
@@ -38,7 +53,6 @@ h2 {
 
 .value {
 	text-align: center;
-
 }
 
 .selected {
@@ -51,8 +65,7 @@ h2 {
 	height: 40px;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
-	text-align: center;
-	
+	text-align: center;	
 }
 
 
@@ -66,8 +79,7 @@ h2 {
 	height: 40px;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
-	text-align: center;
-	
+	text-align: center;	
 }
 
 
@@ -82,5 +94,30 @@ h2 {
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	text-align: center;
-	
 }
+
+
+#button {
+	height: 21px;
+	color: black;
+	text-align: center-middle;
+	font-size: 12px;
+
+}
+
+
+#selected_ship {
+	height: 21px;
+	color: black;
+	text-align: center-middle;
+	font-size: 12px;
+
+}
+
+#submit {
+	height: 140px;
+	color: black;
+	font-size: 50px;
+
+}
+
