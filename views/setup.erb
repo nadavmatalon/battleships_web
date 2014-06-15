@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="/css/style.css" rel="stylesheet">
+	<script>
+		var ship_size = 0;
+
+	</script>
+</head>
+<body>
+	<h1>BATTLESHIPS</h1>
+	<h2><%= @message %></h2>	
+
+	<form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
+		<select id="selected_ship" name="selected_ship" onChange="ship_size=this.value; ship_type.value=this.options[this.selectedIndex].text;">
+			<option value=''></option>
+			<option value='1'>submarine</option>
+			<option value='2'>destroyer</option>
+			<option value='3'>cruiser</option>
+			<option value='4'>battleship</option>
+		</select><br/>
+
+		<input class='legend' type='button' value=' ' disabled>
+		<input class='legend' type='button' value='1' disabled>
+		<input class='legend' type='button' value='2' disabled>
+		<input class='legend' type='button' value='3' disabled><br/>
+
+		<input class='legend' type='button' value='A'>
+		<input class='coord' type='button' value='A1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+		<input class='coord' type='button' value='A2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+		<input class='coord' type='button' value='A3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';"><br/>
+
+		<input class='legend' type='button' value='B'>
+		<input class='coord' type='button' value='B1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+		<input class='coord' type='button' value='B2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+		<input class='coord' type='button' value='B3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';"><br/>
+
+		<input class='legend' type='button' value='C'>
+		<input class='coord' type='button' value='C1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+		<input class='coord' type='button' value='C2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+		<input class='coord' type='button' value='C3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';"><br/>
+
+		<input type='hidden' id='ship_type' name='ship_type'>
+		<input type='hidden' id='coords' name='coords'>
+
+		<input type='submit' name='submit' value='submit' onclick="alert(coords.value);">
+
+	</form>
+</body>
+</html>
+	

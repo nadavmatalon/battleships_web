@@ -1,3 +1,59 @@
-title {
-	color: salmon; 
+
+h1 {
+	font-style: bold;
+	color: blue;
+	font-size: 40px;
 }
+
+h2 {
+	font-size: 15px;
+}
+
+.legend {
+	font-size: 12px;
+	background-color: blue;
+	color: white;
+	border-width: medium;
+	padding-top: 4px;
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	text-align: center;
+}
+
+
+.coord {
+	font-size: 12px;
+	background-color: blue;
+	color: blue;
+	border-width: medium;
+	padding-top: 4px;
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	text-align: center;
+}
+
+.value {
+	text-align: center;
+
+}
+
+.selected {
+	font-size: 12px;
+	background-color: orange;
+	color: orange;
+	border-width: medium;
+	padding-top: 4px;
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	text-align: center;
+	
+}
+
+
+
