@@ -1,6 +1,5 @@
 require_relative "game"
 
-
 require 'sinatra'
 
 set :views, Proc.new {File.join(root, '..', "views")}
@@ -10,7 +9,6 @@ enable :sessions
 
 SHIPS_TO_PLACE = 2
 SUNK_SHIPS_TO_WIN = 2
-
 
 get '/' do
 	session[:game]= create_game
@@ -255,8 +253,3 @@ end
 def winner_name
 	game.winner_name
 end
-
-
-
-
-

@@ -1,169 +1,569 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<link href="/css/style.css" rel="stylesheet">
-	<script>
-		var ship_size = 0;
+	<head>
+		<title></title>
+		<link href="/css/style.css" rel="stylesheet">
+		<script>
+			var ship_size = 0;
+		</script>
+	</head>
+	<body>
+		<h1>BATTLESHIPS</h1>
+		<h2><%= session[:message] %></h2>
 
-	</script>
-</head>
-<body>
-	<h1>BATTLESHIPS</h1>
-	<h2><%= session[:message] %></h2>	
-	<form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
-		<select id="selected_ship" name="selected_ship" onChange="ship_size=this.value; ship_type.value=this.options[this.selectedIndex].text;">
-			<option value=''></option>
-			<option value='1'>submarine</option>
-			<option value='2'>destroyer</option>
-			<option value='3'>cruiser</option>
-			<option value='4'>battleship</option>
-		</select><br/>
-
-		<input class='legend' type='button' value=' ' disabled>
-		<input class='legend' type='button' value='1' disabled>
-		<input class='legend' type='button' value='2' disabled>
-		<input class='legend' type='button' value='3' disabled>
-		<input class='legend' type='button' value='4' disabled>
-		<input class='legend' type='button' value='5' disabled>
-		<input class='legend' type='button' value='6' disabled>
-		<input class='legend' type='button' value='7' disabled>
-		<input class='legend' type='button' value='8' disabled>
-		<input class='legend' type='button' value='9' disabled>
-		<input class='legend' type='button' value='10' disabled><br/>
-
-		<input class='legend' type='button' value='A'>
-		<% if current_player_occupied_coordinates.include?("A1".to_sym) %>
-			<input class='selected' type='button' value='A1' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A2".to_sym) %>
-			<input class='selected' type='button' value='A2' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A3".to_sym) %>
-			<input class='selected' type='button' value='A3' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A4".to_sym) %>
-			<input class='selected' type='button' value='A4' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A5".to_sym) %>
-			<input class='selected' type='button' value='A5' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A6".to_sym) %>
-			<input class='selected' type='button' value='A6' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A7".to_sym) %>
-			<input class='selected' type='button' value='A7' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A8".to_sym) %>
-			<input class='selected' type='button' value='A8' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A9".to_sym) %>
-			<input class='selected' type='button' value='A9' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("A10".to_sym) %>
-			<input class='selected' type='button' value='A10' disabled>
-		<% else %>
-			<input class='coord' type='button' value='A10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %><br/>
-
-
-		<input class='legend' type='button' value='B'>
-		<% if current_player_occupied_coordinates.include?("B1".to_sym) %>
-			<input class='selected' type='button' value='B1' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B2".to_sym) %>
-			<input class='selected' type='button' value='B2' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B3".to_sym) %>
-			<input class='selected' type='button' value='B3' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B4".to_sym) %>
-			<input class='selected' type='button' value='B4' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-
-		<% if current_player_occupied_coordinates.include?("B5".to_sym) %>
-			<input class='selected' type='button' value='B5' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B6".to_sym) %>
-			<input class='selected' type='button' value='B6' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B7".to_sym) %>
-			<input class='selected' type='button' value='B7' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B8".to_sym) %>
-			<input class='selected' type='button' value='B8' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B9".to_sym) %>
-			<input class='selected' type='button' value='B9' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("B10".to_sym) %>
-			<input class='selected' type='button' value='B10' disabled>
-		<% else %>
-			<input class='coord' type='button' value='B10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %><br/>
-
-
-
-		<input class='legend' type='button' value='C'>
-		<% if current_player_occupied_coordinates.include?("C1".to_sym) %>
-			<input class='selected' type='button' value='C1' disabled>
-		<% else %>
-			<input class='coord' type='button' value='C1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("C2".to_sym) %>
-			<input class='selected' type='button' value='C2' disabled>
-		<% else %>
-			<input class='coord' type='button' value='C2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %>
-		<% if current_player_occupied_coordinates.include?("C3".to_sym) %>
-			<input class='selected' type='button' value='C3' disabled>
-		<% else %>
-			<input class='coord' type='button' value='C3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
-		<% end %><br/>
-
-
-		<input type='hidden' id='ship_type' name='ship_type'>
-		<input type='hidden' id='coords' name='coords'>
-
-		<input type='submit' name='submit' value='submit' onclick="">
-
-	</form>
-</body>
-</html>
+		<form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
 	
+			<table border="0px" width="200px">
+				<tr>
+					<td>
+						<select id="selected_ship" name="selected_ship" onChange="ship_size=this.value; ship_type.value=this.options[this.selectedIndex].text;">
+							<option value="1" selected>submarine</option>
+							<option value='2'>destroyer</option>
+							<option value='3'>cruiser</option>
+							<option value='4'>battleship</option>
+						</select>
+					</td>
+					<td>
+						<input type='submit' name='submit' value='submit' onclick=""><br/>
+					</td>
+				</tr>
+			</table>	
+
+			<input class='legend' type='button' value=' ' disabled>
+			<input class='legend' type='button' value='1' disabled>
+			<input class='legend' type='button' value='2' disabled>
+			<input class='legend' type='button' value='3' disabled>
+			<input class='legend' type='button' value='4' disabled>
+			<input class='legend' type='button' value='5' disabled>
+			<input class='legend' type='button' value='6' disabled>
+			<input class='legend' type='button' value='7' disabled>
+			<input class='legend' type='button' value='8' disabled>
+			<input class='legend' type='button' value='9' disabled>
+			<input class='legend' type='button' value='10' disabled><br/>
+
+			<input class='legend' type='button' value='A'>
+			<% if current_player_occupied_coordinates.include?("A1".to_sym) %>
+				<input class='selected' type='button' value='A1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A2".to_sym) %>
+				<input class='selected' type='button' value='A2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A3".to_sym) %>
+				<input class='selected' type='button' value='A3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A4".to_sym) %>
+				<input class='selected' type='button' value='A4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A5".to_sym) %>
+				<input class='selected' type='button' value='A5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A6".to_sym) %>
+				<input class='selected' type='button' value='A6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A7".to_sym) %>
+				<input class='selected' type='button' value='A7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A8".to_sym) %>
+				<input class='selected' type='button' value='A8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A9".to_sym) %>
+				<input class='selected' type='button' value='A9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("A10".to_sym) %>
+				<input class='selected' type='button' value='A10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='A10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='B'>
+			<% if current_player_occupied_coordinates.include?("B1".to_sym) %>
+				<input class='selected' type='button' value='B1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B2".to_sym) %>
+				<input class='selected' type='button' value='B2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B3".to_sym) %>
+				<input class='selected' type='button' value='B3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B4".to_sym) %>
+				<input class='selected' type='button' value='B4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B5".to_sym) %>
+				<input class='selected' type='button' value='B5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B6".to_sym) %>
+				<input class='selected' type='button' value='B6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B7".to_sym) %>
+				<input class='selected' type='button' value='B7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B8".to_sym) %>
+				<input class='selected' type='button' value='B8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B9".to_sym) %>
+				<input class='selected' type='button' value='B9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("B10".to_sym) %>
+				<input class='selected' type='button' value='B10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='B10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='C'>
+			<% if current_player_occupied_coordinates.include?("C1".to_sym) %>
+				<input class='selected' type='button' value='C1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C2".to_sym) %>
+				<input class='selected' type='button' value='C2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C3".to_sym) %>
+				<input class='selected' type='button' value='C3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C4".to_sym) %>
+				<input class='selected' type='button' value='C4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C5".to_sym) %>
+				<input class='selected' type='button' value='C5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C6".to_sym) %>
+				<input class='selected' type='button' value='C6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C7".to_sym) %>
+				<input class='selected' type='button' value='C7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C8".to_sym) %>
+				<input class='selected' type='button' value='C8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("C9".to_sym) %>
+				<input class='selected' type='button' value='C9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("C10".to_sym) %>
+				<input class='selected' type='button' value='C10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='C10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='D'>
+			<% if current_player_occupied_coordinates.include?("D1".to_sym) %>
+				<input class='selected' type='button' value='D1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D2".to_sym) %>
+				<input class='selected' type='button' value='D2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D3".to_sym) %>
+				<input class='selected' type='button' value='D3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D4".to_sym) %>
+				<input class='selected' type='button' value='D4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D5".to_sym) %>
+				<input class='selected' type='button' value='D5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D6".to_sym) %>
+				<input class='selected' type='button' value='D6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D7".to_sym) %>
+				<input class='selected' type='button' value='D7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D8".to_sym) %>
+				<input class='selected' type='button' value='D8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("D9".to_sym) %>
+				<input class='selected' type='button' value='D9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("D10".to_sym) %>
+				<input class='selected' type='button' value='D10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='D10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='E'>
+			<% if current_player_occupied_coordinates.include?("E1".to_sym) %>
+				<input class='selected' type='button' value='E1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E2".to_sym) %>
+				<input class='selected' type='button' value='E2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E3".to_sym) %>
+				<input class='selected' type='button' value='E3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E4".to_sym) %>
+				<input class='selected' type='button' value='E4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E5".to_sym) %>
+				<input class='selected' type='button' value='E5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E6".to_sym) %>
+				<input class='selected' type='button' value='E6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E7".to_sym) %>
+				<input class='selected' type='button' value='E7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E8".to_sym) %>
+				<input class='selected' type='button' value='E8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("E9".to_sym) %>
+				<input class='selected' type='button' value='E9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("E10".to_sym) %>
+				<input class='selected' type='button' value='E10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='E10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='F'>
+			<% if current_player_occupied_coordinates.include?("F1".to_sym) %>
+				<input class='selected' type='button' value='F1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F2".to_sym) %>
+				<input class='selected' type='button' value='F2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F3".to_sym) %>
+				<input class='selected' type='button' value='F3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F4".to_sym) %>
+				<input class='selected' type='button' value='F4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F5".to_sym) %>
+				<input class='selected' type='button' value='F5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F6".to_sym) %>
+				<input class='selected' type='button' value='F6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F7".to_sym) %>
+				<input class='selected' type='button' value='F7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F8".to_sym) %>
+				<input class='selected' type='button' value='F8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("F9".to_sym) %>
+				<input class='selected' type='button' value='F9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("F10".to_sym) %>
+				<input class='selected' type='button' value='F10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='F10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='G'>
+			<% if current_player_occupied_coordinates.include?("G1".to_sym) %>
+				<input class='selected' type='button' value='G1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G2".to_sym) %>
+				<input class='selected' type='button' value='G2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G3".to_sym) %>
+				<input class='selected' type='button' value='G3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G4".to_sym) %>
+				<input class='selected' type='button' value='G4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G5".to_sym) %>
+				<input class='selected' type='button' value='G5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G6".to_sym) %>
+				<input class='selected' type='button' value='G6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G7".to_sym) %>
+				<input class='selected' type='button' value='G7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G8".to_sym) %>
+				<input class='selected' type='button' value='G8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("G9".to_sym) %>
+				<input class='selected' type='button' value='G9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("G10".to_sym) %>
+				<input class='selected' type='button' value='G10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='G10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='H'>
+			<% if current_player_occupied_coordinates.include?("H1".to_sym) %>
+				<input class='selected' type='button' value='H1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H2".to_sym) %>
+				<input class='selected' type='button' value='H2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H3".to_sym) %>
+				<input class='selected' type='button' value='H3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H4".to_sym) %>
+				<input class='selected' type='button' value='H4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H5".to_sym) %>
+				<input class='selected' type='button' value='H5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H6".to_sym) %>
+				<input class='selected' type='button' value='H6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H7".to_sym) %>
+				<input class='selected' type='button' value='H7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H8".to_sym) %>
+				<input class='selected' type='button' value='H8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("H9".to_sym) %>
+				<input class='selected' type='button' value='H9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("H10".to_sym) %>
+				<input class='selected' type='button' value='H10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='H10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='I'>
+			<% if current_player_occupied_coordinates.include?("I1".to_sym) %>
+				<input class='selected' type='button' value='I1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I2".to_sym) %>
+				<input class='selected' type='button' value='I2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I3".to_sym) %>
+				<input class='selected' type='button' value='I3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I4".to_sym) %>
+				<input class='selected' type='button' value='I4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I5".to_sym) %>
+				<input class='selected' type='button' value='I5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I6".to_sym) %>
+				<input class='selected' type='button' value='I6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I7".to_sym) %>
+				<input class='selected' type='button' value='I7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I8".to_sym) %>
+				<input class='selected' type='button' value='I8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("I9".to_sym) %>
+				<input class='selected' type='button' value='I9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("I10".to_sym) %>
+				<input class='selected' type='button' value='I10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='I10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input class='legend' type='button' value='J'>
+			<% if current_player_occupied_coordinates.include?("J1".to_sym) %>
+				<input class='selected' type='button' value='J1' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J1' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J2".to_sym) %>
+				<input class='selected' type='button' value='J2' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J2' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J3".to_sym) %>
+				<input class='selected' type='button' value='J3' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J3' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J4".to_sym) %>
+				<input class='selected' type='button' value='J4' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J4' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J5".to_sym) %>
+				<input class='selected' type='button' value='J5' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J5' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J6".to_sym) %>
+				<input class='selected' type='button' value='J6' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J6' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J7".to_sym) %>
+				<input class='selected' type='button' value='J7' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J7' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J8".to_sym) %>
+				<input class='selected' type='button' value='J8' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J8' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>
+			<% if current_player_occupied_coordinates.include?("J9".to_sym) %>
+				<input class='selected' type='button' value='J9' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J9' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %>		
+			<% if current_player_occupied_coordinates.include?("J10".to_sym) %>
+				<input class='selected' type='button' value='J10' disabled>
+			<% else %>
+				<input class='coord' type='button' value='J10' onclick="coords.value+=this.value+', '; this.className='selected'; this.disabled='true';">
+			<% end %><br/>
+
+			<input type='hidden' id='ship_type' name='ship_type' value="submarine">
+			<input type='hidden' id='coords' name='coords'>
+		</form>
+	</body>
+</html>
+		

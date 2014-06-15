@@ -56,9 +56,9 @@ h2 {
 }
 
 
-.attacked {
+.attacked_hit {
 	font-size: 12px;
-	background-color: blue;
+	background-color: red;
 	color: white;
 	border-width: medium;
 	padding-top: 4px;
@@ -70,3 +70,17 @@ h2 {
 	
 }
 
+
+.attacked_miss {
+	font-size: 12px;
+	background-color: gray;
+	color: gray;
+	border-width: medium;
+	padding-top: 4px;
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	text-align: center;
+	
+}
