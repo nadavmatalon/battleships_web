@@ -143,6 +143,7 @@ post '/player_attack' do
 	attack_result = game.attack(params[:attack_coord].to_sym)
 	if game.over?
 		session[:message]= "GAME_OVER! THE WINNER IS #{current_player_name.upcase}"	
+		redirect '/end_game'
 	else		
 		session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
 	end
@@ -155,6 +156,9 @@ post "/player_switch_turn" do
 	erb :player_turn
 end
 
+get '/end_game' do
+	erb :end_game
+end
 
 def player_occupied_coordinates
 	game.player_one.occupied_coordinates
