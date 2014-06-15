@@ -32,8 +32,21 @@ class Board
 	end
 
 	def attack coordinate
-		attacked_cooridnates << coordinate if valid?(coordinate) && !attacked?(coordinate)
-		attacked_ship(coordinate).hit coordinate if successful_attack_on? coordinate
+		if valid?(coordinate)
+			if !previously_attacked?(coordinate)
+				attacked_cooridnates << coordinate
+				if successful_attack_on? coordinate
+					attacked_ship(coordinate).hit coordinate
+					:hit
+				else
+					:miss
+				end
+			else
+				"This coordinate was already attacked"
+			end
+		else
+			"This is not a valid coordinate"
+		end 
 	end
 
 	def attacked_cooridnates
@@ -64,7 +77,7 @@ class Board
 		ships.select {|ship| ship.sunk?}
 	end
 
-	def attacked? coordinate
+	def previously_attacked? coordinate
 		(attacked_cooridnates & [coordinate]).any?
 	end
 

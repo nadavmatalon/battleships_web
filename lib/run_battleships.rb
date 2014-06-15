@@ -28,6 +28,10 @@ def	current_player_name
 	current_player == game.player_one ? "PLAYER ONE" : "PLAYER TWO"
 end
 
+def	other_player_name
+	current_player == game.player_one ? "PLAYER TWO" : "PLAYER ONE"
+end
+
 def initialize_new_game
 	create_game
 	show_welcome_message
@@ -216,11 +220,43 @@ end
 def play_loop_until_game_over
 	while !game.over?
 		play_turn
+		switch_turn
 	end
 end
 
 def play_turn
+	coordinate = get_attack_coordinate_from(current_player)
+	print attack_result_message(get_attack_result(coordinate))
+end
 
+
+def get_attack_coordinate_from(current_player)
+	print attack_coordinate_request_message
+	print player_prompt
+	coordinate = get_coordinate_from(user_input)
+	if current_player.board.valid?(coordinate)
+		if !(other_player.board.previously_attacked?(coordinate))
+			coordinate
+		else
+			print "\nSorry, this coordinate was already attacked - please try again.\n\n"
+			get_attack_coordinate_from(current_player)
+		end
+	else
+		print "\nSorry, this is not a legitimate coordinate - please try again.\n\n"
+		get_attack_coordinate_from(current_player)
+	end
+end	
+
+def attack_coordinate_request_message
+	"Please select coordinate to attack:\n\n"
+end
+
+def get_attack_result(coordinate)
+	game.attack(coordinate).to_s.capitalize!
+end
+
+def attack_result_message(attack_result)
+	"\n#{attack_result}!\n\n"
 end
 
 def announce_winner
@@ -229,7 +265,7 @@ def announce_winner
 end
 
 def winner_name
-	other_player
+	other_player_name
 end
 
 def user_input 
@@ -237,57 +273,5 @@ def user_input
 end
 
 
-
-
-
-
-
-
-#-----------------------
-
-
-# def place ship
-# 	position = get_position_selection(ship_type)
-# 	coordinates = calculate_coordinates(ship_type, position, first_coordinate)
-# 	current_player.place(ship(coordinates))
-# 	print "\n#{ship_type.to_s.capitalize} successfully placed on board!\n\n\n"
-# 	print "\nSorry, #{ship.type} could not be placed on board - please try again.\n\n"
-# end
-
-
-
-
-
-
-# def play_turn
-# 	coordinate = get_attack_coordinate_from_user
-# 	current_player.attack(coordinate)
-# 	switch_turn
-# 	print attack_result_message(get_attack_result(coordinate))
-# end
-
-# def attack_result_message(attack_result)
-# 	"\n#{attack_result}!\n\n"
-# end
-
-# def get_attack_result coordinate
-# 	game.other_player.successful_attack_on? coordinate
-# end
-
-# def attack_coordinate_request_message
-# 	"Please select coordinate to attack:\n\n"
-# end
-
-
-# def get_attack_coordinate_from_user
-# 	print attack_coordinate_request_message
-# 	print player_prompt
-# 	coordinate = get_coordinate_from(user_input)
-# 	if (Coordinate.new(coordinate).valid?)
-# 		return coordinate
-# 	else
-# 		print "\nSorry, this is not a legitimate coordinate - please try again.\n\n"
-# 		get_attack_coordinate_from_user
-# 	end
-# end 
+run_game
 
