@@ -25,11 +25,11 @@ def run_game
 end
 
 def	current_player_name
-	current_player == game.player_one ? "PLAYER ONE" : "PLAYER TWO"
+	game.current_player_name
 end
 
 def	other_player_name
-	current_player == game.player_one ? "PLAYER TWO" : "PLAYER ONE"
+	game.other_player_name
 end
 
 def initialize_new_game
@@ -275,7 +275,7 @@ def announce_winner
 end
 
 def winner_name
-	other_player_name
+	game.winner_name
 end
 
 def user_input 

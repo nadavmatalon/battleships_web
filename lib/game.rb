@@ -64,6 +64,14 @@ class Game
 		@current_turn
 	end
 
+	def	current_player_name
+		current_player == player_one ? "PLAYER ONE" : "PLAYER TWO"
+	end
+
+	def	other_player_name
+		current_player == player_one ? "PLAYER TWO" : "PLAYER ONE"
+	end
+
 	def place ship
 		ship_count = current_player.ship_count
 		current_player.place ship
@@ -74,14 +82,13 @@ class Game
 		other_player.attack coordinate
 	end
 
-	def winner
-		current_turn
-	end
-
 	def valid? coordinate
 		current_player.valid? coordinate
 	end
 
+	def winner_name
+		other_player_name
+	end
 
 end
 
