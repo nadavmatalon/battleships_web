@@ -39,6 +39,10 @@ class Game
 		@player_two = Player.new
 	end
 
+	def set_player_name player, new_name
+		player.set_name(new_name)
+	end
+
 	def add_players_to_game
 		players.push(player_one, player_two)
 	end

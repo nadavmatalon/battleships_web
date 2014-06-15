@@ -2,12 +2,21 @@ require_relative "board"
 
 class Player
 
-	def initialize(board = Board.new)
+	def initialize(name = "Player", board = Board.new)
+		@name = name
 		@board = board
 	end
 
 	def board
 		@board
+	end
+
+	def name
+		@name
+	end
+
+	def set_name new_name
+		@name = new_name
 	end
 
 	def ships
@@ -49,6 +58,11 @@ class Player
 	def valid? coordinate
 		board.valid? coordinate
 	end
+
+	def occupied_coordinates
+		board.occupied_coordinates
+	end
+
 
 
 end
