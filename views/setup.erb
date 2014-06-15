@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>BATTLESHIPS</h1>
-	<h2><%= @message %></h2>	
+	<h2><%= session[:message] %></h2>	
 
 	<form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
 		<select id="selected_ship" name="selected_ship" onChange="ship_size=this.value; ship_type.value=this.options[this.selectedIndex].text;">

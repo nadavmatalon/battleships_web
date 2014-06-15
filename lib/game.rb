@@ -40,7 +40,7 @@ class Game
 	end
 
 	def set_player_name player, new_name
-		player.set_name(new_name)
+		player.set_player_name(new_name)
 	end
 
 	def add_players_to_game
@@ -69,16 +69,16 @@ class Game
 	end
 
 	def	current_player_name
-		current_player == player_one ? "PLAYER ONE" : "PLAYER TWO"
+		current_player.name
 	end
 
 	def	other_player_name
-		current_player == player_one ? "PLAYER TWO" : "PLAYER ONE"
+		other_player.name
 	end
 
 	def place ship
 		ship_count = current_player.ship_count
-		current_player.place ship
+		current_player.place(ship)
 		current_player.ship_count == ship_count + 1
 	end
 
@@ -93,6 +93,8 @@ class Game
 	def winner_name
 		other_player_name
 	end
+
+
 
 end
 

@@ -20,7 +20,7 @@ class Board
 	end
 
 	def place new_ship
-		@ships << new_ship unless ship_already_present?(new_ship)
+		@ships << new_ship 
 	end
 
 	def ship_already_present? new_ship

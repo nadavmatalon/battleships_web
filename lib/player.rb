@@ -15,7 +15,7 @@ class Player
 		@name
 	end
 
-	def set_name new_name
+	def set_player_name new_name
 		@name = new_name
 	end
 

@@ -1,5 +1,5 @@
-require_relative "run_battleships"
 require_relative "game"
+
 
 require 'sinatra'
 
@@ -8,13 +8,13 @@ set :public, Proc.new {File.join(root, '..', "public")}
 
 enable :sessions
 
+SUNK_SHIPS_TO_WIN = 1
 
 get '/' do
+	session[:game]= create_game
 	session[:num_of_players]= 0
-	session[:player_one]= ''
-	session[:player_two]= ''
-	@game = Game.new
-	@message= 'Player One, please enter your name:'
+	game_created = !game.nil?
+	session[:message]= "Player One, please enter your name:"
 	erb :index
 end
 
@@ -25,8 +25,8 @@ end
 post '/login_player_one' do
 	session[:player_one]= params[:text]
 	session[:num_of_players] += 1
-	set_player_name(player_one, session[:player_one])
-	@message= 'Player Two, please enter your name:'	
+	set_player_name(player_one, (session[:player_one]).to_s)
+	session[:message]= "Player Two, please enter your name:"
 	erb :index
 end
 
@@ -34,17 +34,17 @@ post '/login_player_two' do
 	session[:player_two]= params[:text]
 	if session[:player_two] != session[:player_one]
 		session[:num_of_players] += 1
-		set_player_name(player_two, session[:player_one])
+		set_player_name(player_two, (session[:player_two]).to_s)
 		redirect '/setup'
 	else
-		@message= "This is not a valid name, please try again:"
+		session[:message]= "This is not a valid name, please try again:"
 		erb :index
 	end
 end
 
 get '/setup' do
 	if session[:num_of_players] == 2
-		@message= "Welcome #{session[:player_one]} and #{session[:player_two]}!"
+		session[:message]= "Welcome #{session[:player_one]} and #{session[:player_two]}!"
 		erb :index
 	else
 		redirect '/'
@@ -56,7 +56,7 @@ post '/setup' do
 end
 
 get '/setup_player_one' do
-	@message= "#{session[:player_one]}, please select start coordinate for battleship:"
+	session[:message]= "#{session[:player_one]}, please select coordinates for battleship:"
 	erb :setup
 end
 
@@ -104,17 +104,17 @@ post '/place_ship' do
 		end
 	if !ship.nil?
 		place(ship)
-		@message= "#{ship_type.to_s.capitalize} created at coordinates: #{coords.join(', ')}; ship count: #{current_player.ship_count}; occupied coordinates: #{current_player_occupied_coordinates}"
+		session[:message]= "#{current_player_name}, #{ship_type.to_s.capitalize} placed at coordinates: #{coords.join(', ')}; ship count: #{current_player.ship_count}; occupied coordinates: #{current_player_occupied_coordinates}"
 	else
-		@message= "ship could not be created"
+		session[:message]= "ship could not be created"
 	end
 	erb :setup
 end
-
-
-SUNK_SHIPS_TO_WIN = 1
-
 	
+def message
+ 	session[:message]
+end
+
 def player_occupied_coordinates
 	game.player_one.occupied_coordinates
 end
@@ -127,8 +127,12 @@ def current_player_occupied_coordinates
 	game.current_player.occupied_coordinates
 end
 
+def create_game
+	Game.new
+end
+
 def game
-	@game ||= Game.new
+	session[:game]
 end
 
 def player_one
@@ -152,11 +156,11 @@ def switch_turn
 end
 
 def	current_player_name
-	game.current_player_name
+	game.current_player.name
 end
 
 def	other_player_name
-	game.other_player_name
+	game.other_player.name
 end
 
 def set_player_name player, new_name

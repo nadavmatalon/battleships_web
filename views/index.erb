@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h1>BATTLESHIPS</h1>
-		<h3><%= @message %><h3>
+		<h3><%= session[:message] %><h3>
 		<% if session[:num_of_players] == 0 %>
 			<form action='/login_player_one' method='POST'>
 				<input type='text' name='text' placeholder='Name' required autofocus>
