@@ -63,6 +63,9 @@ class Player
 		board.occupied_coordinates
 	end
 
+	def hit_coordinates
+		board.hit_coordinates
+	end
 
 
 end

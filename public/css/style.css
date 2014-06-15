@@ -56,4 +56,17 @@ h2 {
 }
 
 
+.attacked {
+	font-size: 12px;
+	background-color: blue;
+	color: white;
+	border-width: medium;
+	padding-top: 4px;
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	text-align: center;
+	
+}
 

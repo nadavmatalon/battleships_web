@@ -9,6 +9,7 @@ class Board
 	def initialize(ships = [])
 		@ships = ships
 		@attacked_cooridnates = []
+		@hit_coordinates = []
 	end
 
 	def ships
@@ -31,12 +32,17 @@ class Board
 		(ships.map {|ship| ship.coordinates_list}).flatten
 	end
 
+	def hit_coordinates
+		@hit_coordinates
+	end
+
 	def attack coordinate
 		if valid?(coordinate)
 			if !previously_attacked?(coordinate)
 				attacked_cooridnates << coordinate
 				if successful_attack_on? coordinate
 					attacked_ship(coordinate).hit coordinate
+					hit_coordinates << coordinate
 					:hit
 				else
 					:miss
