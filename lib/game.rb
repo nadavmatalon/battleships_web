@@ -78,6 +78,11 @@ class Game
 		current_turn
 	end
 
+	def valid? coordinate
+		current_player.valid? coordinate
+	end
+
+
 end
 
 

@@ -34,14 +34,14 @@ describe Player do
 
 	it "can attack a specific coordinate on the board" do
 		player.place(submarine)
-		expect(player.attack(:A5)).to be_false
-		expect(player.attack(:A1)).to be_true
+		expect(player.attack(:A5)).to eq :miss
+		expect(player.attack(:A1)).to eq :hit
 	end
 
 	it "knows which coordinates were already attacked" do
 		player.attack(:A1)
-		expect(player.attacked?(:A1)).to be_true
-		expect(player.attacked?(:A2)).to be_false
+		expect(player.previously_attacked?(:A1)).to be_true
+		expect(player.previously_attacked?(:A2)).to be_false
 	end
 
 	it "knows all coordinates that were attacked" do

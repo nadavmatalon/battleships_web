@@ -93,13 +93,14 @@ describe Board do
 
  	it "cannot attack the same coordinate twice" do
 		board.attack(:A1)
-		expect(board.attack(:A1)).to eq nil
+		message = "This coordinate was already attacked"
+		expect(board.attack(:A1)).to eq message
  	end
 
  	it "knows which coordinates were attacked" do
 		board.attack(:A1)
-		expect(board.attacked?(:A1)).to be_true
-		expect(board.attacked?(:A2)).to be_false 		
+		expect(board.previously_attacked?(:A1)).to be_true
+		expect(board.previously_attacked?(:A2)).to be_false 		
  	end
 
  	it "knows which coordinates were attacked" do

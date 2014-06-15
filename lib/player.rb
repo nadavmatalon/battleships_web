@@ -42,6 +42,15 @@ class Player
 		sunk_ships.count
 	end
 
+	def previously_attacked? coordinate
+		board.previously_attacked? coordinate
+	end
+
+	def valid? coordinate
+		board.valid? coordinate
+	end
+
+
 end
 
 

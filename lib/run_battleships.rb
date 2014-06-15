@@ -103,6 +103,12 @@ def get_initial_coordinate_for ship_type
 	print coordinate_request_message_for(ship_type)
 	print player_prompt
 	coordinate = get_coordinate_from(user_input)
+	if game.valid?(coordinate)
+		return coordinate
+	else
+		print ilegitimate_coordinate_message
+		get_initial_coordinate_for ship_type
+	end
 end
 
 def coordinate_request_message_for(ship_type)
@@ -114,7 +120,7 @@ def player_prompt
 end
 
 def get_coordinate_from user_input
-	user_input.capitalize.to_sym
+	coordinate = user_input.capitalize.to_sym
 end
 
 def get_ship_position (ship_type)
@@ -234,18 +240,22 @@ def get_attack_coordinate_from(current_player)
 	print attack_coordinate_request_message
 	print player_prompt
 	coordinate = get_coordinate_from(user_input)
-	if current_player.board.valid?(coordinate)
-		if !(other_player.board.previously_attacked?(coordinate))
+	if game.valid?(coordinate)
+		if !(other_player.previously_attacked?(coordinate))
 			coordinate
 		else
 			print "\nSorry, this coordinate was already attacked - please try again.\n\n"
 			get_attack_coordinate_from(current_player)
 		end
 	else
-		print "\nSorry, this is not a legitimate coordinate - please try again.\n\n"
+		print ilegitimate_coordinate_message
 		get_attack_coordinate_from(current_player)
 	end
 end	
+
+def ilegitimate_coordinate_message
+	"\nSorry, this is not a legitimate coordinate - please try again.\n\n"
+end
 
 def attack_coordinate_request_message
 	"Please select coordinate to attack:\n\n"
