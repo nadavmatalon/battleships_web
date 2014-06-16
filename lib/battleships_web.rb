@@ -140,13 +140,23 @@ post '/player_turn' do
 	erb :player_turn
 end
 
-post '/player_attack' do	
-	attack_result = game.attack(params[:attack_coord].to_sym)
+post '/player_attack' do
+	coordinate = params[:attack_coord].to_sym
+	attack_result = game.attack(coordinate)
 	if game.over?
 		session[:message]= "GAME_OVER! #{current_player_name.upcase} IS THE WINNER!"	
 		redirect '/end_game'
-	else		
-		session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
+	else
+		if (attack_result == :hit)
+			hit_ship = attacked_ship(coordinate)
+				if hit_ship.sunk?
+					session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase} - #{hit_ship.class.to_s} sunk!"	
+				else
+					session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
+				end
+		else
+			session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
+		end
 	end
 	erb :player_turn
 end
@@ -253,6 +263,10 @@ end
 
 def hit_coordinates
 	game.hit_coordinates
+end
+
+def attacked_ship coordinate
+	game.attacked_ship coordinate
 end
 
 def winner_name

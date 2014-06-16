@@ -67,7 +67,9 @@ class Player
 		board.hit_coordinates
 	end
 
-
+	def attacked_ship coordinate
+		board.attacked_ship coordinate
+	end
 end
 
 

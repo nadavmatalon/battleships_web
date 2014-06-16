@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<title>BATTLESHIPS</title>
 		<link href="/css/style.css" rel="stylesheet">
 		<script></script>
 	</head>
@@ -34,6 +34,10 @@
 				<% end %>
 			<% end %><br/>
 			<input class='legend' type='button' value='B' disabled>
+
+
+
+
 			<% array = ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10"] %>
 			<% for n in 0..9 do %>
 				<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>

@@ -110,6 +110,10 @@ class Game
 		other_player.hit_coordinates
 	end
 
+	def attacked_ship coordinate
+		other_player.attacked_ship coordinate
+	end
+
 end
 
 
