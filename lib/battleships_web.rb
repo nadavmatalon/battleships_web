@@ -23,6 +23,7 @@ get '/login' do
 end
 
 post '/login_player_one' do
+	# puts params
 	session[:player_one]= params[:text]
 	session[:num_of_players] += 1
 	set_player_name(player_one, (session[:player_one]).to_s)
@@ -157,7 +158,7 @@ post "/player_switch_turn" do
 end
 
 get '/end_game' do
-	erb :end_game
+	erb :end_game 
 end
 
 def player_occupied_coordinates
