@@ -136,6 +136,7 @@ get '/play_game' do
 end
 
 post '/player_turn' do
+	switch_turn
 	session[:message]= "#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
 end
@@ -159,12 +160,10 @@ post '/player_attack' do
 			session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
 		end
 	end
-	erb :player_turn
+	erb :player_switch_turn
 end
 
 post "/player_switch_turn" do 
-	switch_turn
-	session[:message]= "#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
 end
 
