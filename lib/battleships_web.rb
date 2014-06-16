@@ -150,7 +150,7 @@ post '/player_attack' do
 	erb :player_turn
 end
 
-post "/player_switch_turn" do
+post "/player_switch_turn" do 
 	switch_turn
 	session[:message]= "#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
