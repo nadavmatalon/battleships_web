@@ -91,5 +91,10 @@ class Board
 		Coordinate.new(coordinate).valid?
 	end
 
+	def sunk_ships_coordinates
+		sunk_ships_coordinates = sunk_ships.map {|sunk_ship| sunk_ship.hits}
+		sunk_ships_coordinates.flatten!
+	end
+
 end
 

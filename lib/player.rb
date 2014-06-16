@@ -70,6 +70,10 @@ class Player
 	def attacked_ship coordinate
 		board.attacked_ship coordinate
 	end
+
+	def sunk_ships_coordinates
+		board.sunk_ships_coordinates
+	end
 end
 
 

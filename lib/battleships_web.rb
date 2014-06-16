@@ -150,6 +150,7 @@ post '/player_attack' do
 		if (attack_result == :hit)
 			hit_ship = attacked_ship(coordinate)
 				if hit_ship.sunk?
+					session[:sunk_ships_coordinates] = sunk_ships_coordinates
 					session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase} - #{hit_ship.class.to_s} sunk!"	
 				else
 					session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
@@ -267,6 +268,14 @@ end
 
 def attacked_ship coordinate
 	game.attacked_ship coordinate
+end
+
+def sunk_ships
+	game.sunk_ships
+end
+
+def sunk_ships_coordinates
+	game.sunk_ships_coordinates
 end
 
 def winner_name

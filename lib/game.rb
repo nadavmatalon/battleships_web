@@ -114,6 +114,9 @@ class Game
 		other_player.attacked_ship coordinate
 	end
 
+	def sunk_ships_coordinates
+		other_player.sunk_ships_coordinates
+	end
 end
 
 
