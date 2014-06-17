@@ -131,6 +131,7 @@ get '/setup_player_two' do
 end
 
 get '/play_game' do
+	switch_turn
 	session[:message]= "Let\'s play!"
 	erb :play
 end
@@ -152,12 +153,12 @@ post '/player_attack' do
 			hit_ship = attacked_ship(coordinate)
 				if hit_ship.sunk?
 					session[:sunk_ships_coordinates] = sunk_ships_coordinates
-					session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase} - #{hit_ship.class.to_s} sunk!"	
+					session[:message]= "#{current_player_name}, you sunk a #{hit_ship.class.to_s}!"	
 				else
-					session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
+					session[:message]= "#{current_player_name}, you hit a ship!"	
 				end
 		else
-			session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
+			session[:message]= "#{current_player_name}, nothing there!"	
 		end
 	end
 	erb :player_switch_turn

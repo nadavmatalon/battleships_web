@@ -10,7 +10,7 @@
 		<h2><%= session[:message] %></h2>
 
 		<form name="switch_turn" id="switch_turn" action="/player_turn" method="POST">
-			<input type="submit" id="submit" name="continue" value="Next Player">
+			<input type="submit" id="submit" name="continue" value="Next Player" autofocus>
 		</form><br/>
 
 		<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
@@ -28,7 +28,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -46,7 +46,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -64,7 +64,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -82,7 +82,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -100,7 +100,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -116,7 +116,7 @@
 				<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
 					<% if hit_coordinates.include?((array[n]).to_sym) %>
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
+									<input class="attacked_sunk" name="attack_coord" type='submit' value="+" disabled>
 							<% else %>
 								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
 							<% end %>
@@ -136,7 +136,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -154,7 +154,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -172,7 +172,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
@@ -191,7 +191,7 @@
 							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
 									<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
 							<% else %>
-								<input class="attacked_hit" name="attack_coord" type='submit' value="X" disabled>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
 							<% end %>
 					<% else %>
 								<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
