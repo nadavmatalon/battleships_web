@@ -47,6 +47,10 @@ class Player
 		board.sunk_ships
 	end
 
+	def floating_ships
+		board.floating_ships
+	end
+	
 	def sunk_ships_count
 		sunk_ships.count
 	end

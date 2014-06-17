@@ -132,12 +132,16 @@ end
 
 get '/play_game' do
 	switch_turn
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	session[:message]= "Let\'s play!"
 	erb :play
 end
 
 post '/player_turn' do
 	switch_turn
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	session[:message]= "#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
 end
@@ -268,6 +272,18 @@ end
 
 def attacked_ship coordinate
 	game.attacked_ship coordinate
+end
+
+def player_one_floating_ships
+	floating_ships = game.player_one_floating_ships.flatten.map {|ship| ship.class.to_s}
+	floating_ships.sort!
+	floating_ships.join("<br/>")
+end
+
+def player_two_floating_ships
+	floating_ships = game.player_two_floating_ships.flatten.map {|ship| ship.class.to_s}
+	floating_ships.sort!
+	floating_ships.join("<br/>")
 end
 
 def sunk_ships

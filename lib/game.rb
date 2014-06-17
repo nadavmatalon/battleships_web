@@ -98,6 +98,14 @@ class Game
 		other_player.attacked_cooridnates
 	end
 
+	def player_one_floating_ships
+		player_one.floating_ships
+	end
+
+	def player_two_floating_ships
+		player_two.floating_ships
+	end
+
 	def sunk_ships
 		other_player.sunk_ships
 	end
