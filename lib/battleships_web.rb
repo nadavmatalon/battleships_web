@@ -7,9 +7,6 @@ set :public, Proc.new {File.join(root, '..', "public")}
 
 enable :sessions
 
-SHIPS_TO_PLACE = 2
-SUNK_SHIPS_TO_WIN = 2
-
 get '/' do
 	session[:game]= create_game
 	session[:num_of_players]= 0
@@ -110,7 +107,7 @@ post '/place_ship' do
 		session[:message]= "ship could not be created"
 	end
 
-	if current_player.ship_count < SHIPS_TO_PLACE
+	if current_player.ship_count < Game::SHIPS_TO_PLACE
 
 		erb :setup
 

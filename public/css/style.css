@@ -124,6 +124,7 @@ h2 {
 	text-align: center;
 	line-height: 12px;
 	font-size: 12px;
+	vertical-align: top;
 
 }
 
@@ -153,22 +154,13 @@ h2 {
 	line-height: 15px;
 }
 
-table,th,td {
-border:1px solid black;
-border-spacing:5px;
-
-}
 
 .player_status {
 	margin-top: 10px;
-
 }
 
-div {
-/*	margin-top: 100px;
-*/	background: gray;
-	height:250px;
-	float: top;
-	vertical-align: top;
-	border-spacing: 50px;
+/*table,th,td {
+border:1px solid black;
+border-spacing:5px;
 }
+*/
