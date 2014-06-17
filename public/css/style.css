@@ -9,11 +9,19 @@ body {
 }
 
 h1 {
-	font-style: bold;
+	font-weight: 700;
+	color: blue;
+	font-size: 56px;
+	font-family: arial;
+	letter-spacing: 1px;
+	text-shadow: 1px 1px 1px black;
+	border-color: black;
+
+/*	font-style: bold;
 	color: blue;
 	font-size: 55px;
 	font-family: monospace;
-	letter-spacing: 3px;
+	letter-spacing: 3px;*/
 
 }
 
