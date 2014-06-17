@@ -9,12 +9,12 @@
 		<h3><%= session[:message] %><h3>
 		<% if session[:num_of_players] == 0 %>
 			<form action='/login_player_one' method='POST'>
-				<input type='text' name='text' placeholder='Name' required autofocus>
+				<input class='text' type='text' name='text' placeholder='Name' required autofocus>
 	 			<button id="button">submit</button>
 			</form>	
 		<% elsif session[:num_of_players] == 1 %>
 			<form action='/login_player_two' method='POST'>
-				<input type='text' name='text' placeholder='Name' required autofocus>
+				<input class='text' type='text' name='text' placeholder='Name' required autofocus>
 	 			<button id="button">submit</button>
 			</form>	
 		<% else %>

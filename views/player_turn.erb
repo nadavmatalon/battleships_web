@@ -10,7 +10,7 @@
 		<h2><%= session[:message] %></h2>
 
 		<form name="switch_turn" id="switch_turn" action="/switch_turn" method="POST">
-			<input type="submit" id="submit" name="continue" value="Next Player" disabled>
+ 			<button id="button" disabled>Next Player</button>
 		</form><br/>
 
 		<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
