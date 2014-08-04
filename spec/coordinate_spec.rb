@@ -8,24 +8,24 @@ describe Coordinate do
 	let(:coordinate_4) {Coordinate.new("a")}
 
 	it "knows if it's location is marked by a symbol" do
-		expect(coordinate_1.symbol?).to be_true
-		expect(coordinate_2.symbol?).to be_true
-		expect(coordinate_3.symbol?).to be_false
-		expect(coordinate_4.symbol?).to be_false
+		expect(coordinate_1.symbol?).to be true
+		expect(coordinate_2.symbol?).to be true
+		expect(coordinate_3.symbol?).to be false
+		expect(coordinate_4.symbol?).to be false
 	end
 
 	it "knows if it's located on the (imaginary) grid" do
-		expect(coordinate_1.on_grid?).to be_true
-		expect(coordinate_2.on_grid?).to be_false
-		expect(coordinate_3.on_grid?).to be_false
-		expect(coordinate_4.on_grid?).to be_false
+		expect(coordinate_1.on_grid?).to be true
+		expect(coordinate_2.on_grid?).to be false
+		expect(coordinate_3.on_grid?).to be false
+		expect(coordinate_4.on_grid?).to be false
 	end
 
 	it "knows if it's a valid coordinate" do
-		expect(coordinate_1.valid?).to be_true
-		expect(coordinate_2.valid?).to be_false
-		expect(coordinate_3.valid?).to be_false
-		expect(coordinate_4.valid?).to be_false
+		expect(coordinate_1.valid?).to be true
+		expect(coordinate_2.valid?).to be false
+		expect(coordinate_3.valid?).to be false
+		expect(coordinate_4.valid?).to be false
 	end
 
 	context 'compares coordinates' do

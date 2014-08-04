@@ -67,14 +67,14 @@ describe Board do
 
 	it "register a succesful attack on a ship" do
 		board.place(submarine)
-		expect(board.successful_attack_on?(:A1)).to be_true
+		expect(board.successful_attack_on?(:A1)).to be true
 	end
 
 	it "registers hit on ship if successful attack" do
 		board.place(submarine)
 		board.attack(:A1)
-		expect(submarine.hit?).to be_true
-		expect(submarine.sunk?).to be_true
+		expect(submarine.hit?).to be true
+		expect(submarine.sunk?).to be true
 	end
 
 	it "knows which ships sunk" do
@@ -99,8 +99,8 @@ describe Board do
 
  	it "knows which coordinates were attacked" do
 		board.attack(:A1)
-		expect(board.previously_attacked?(:A1)).to be_true
-		expect(board.previously_attacked?(:A2)).to be_false 		
+		expect(board.previously_attacked?(:A1)).to be true
+		expect(board.previously_attacked?(:A2)).to be false 		
  	end
 
  	it "knows which coordinates were attacked" do
