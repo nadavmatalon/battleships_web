@@ -31,19 +31,19 @@ describe Coordinates do
 	end
 
 	it "knows if it has correct length" do
-		expect(coordinates_1.correct_length?).to be_true
-		expect(coordinates_2.correct_length?).to be_true
-		expect(coordinates_3.correct_length?).to be_true
-		expect(coordinates_4.correct_length?).to be_true
-		expect(coordinates_5.correct_length?).to be_false
+		expect(coordinates_1.correct_length?).to be true
+		expect(coordinates_2.correct_length?).to be true
+		expect(coordinates_3.correct_length?).to be true
+		expect(coordinates_4.correct_length?).to be true
+		expect(coordinates_5.correct_length?).to be false
 	end
 
 	it "knows if it's coordinates are valid" do
-		expect(coordinates_1.valid?).to be_true
-		expect(coordinates_2.valid?).to be_true
-		expect(coordinates_3.valid?).to be_true
-		expect(coordinates_4.valid?).to be_false
-		expect(coordinates_5.valid?).to be_false
+		expect(coordinates_1.valid?).to be true
+		expect(coordinates_2.valid?).to be true
+		expect(coordinates_3.valid?).to be true
+		expect(coordinates_4.valid?).to be false
+		expect(coordinates_5.valid?).to be false
 	end
 
 end

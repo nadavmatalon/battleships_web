@@ -40,8 +40,8 @@ describe Player do
 
 	it "knows which coordinates were already attacked" do
 		player.attack(:A1)
-		expect(player.previously_attacked?(:A1)).to be_true
-		expect(player.previously_attacked?(:A2)).to be_false
+		expect(player.previously_attacked?(:A1)).to be true
+		expect(player.previously_attacked?(:A2)).to be false
 	end
 
 	it "knows all coordinates that were attacked" do

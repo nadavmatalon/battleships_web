@@ -48,7 +48,7 @@ describe Ship do
 	end
 
 	it "cannot be hit at the wrong coordinate" do
-		expect(ship_1.can_be_hit_at?(:A2)).to be_false
+		expect(ship_1.can_be_hit_at?(:A2)).to be false
 	end
 
 end
