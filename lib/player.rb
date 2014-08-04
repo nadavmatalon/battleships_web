@@ -47,6 +47,10 @@ class Player
 		board.sunk_ships
 	end
 
+	def floating_ships
+		board.floating_ships
+	end
+	
 	def sunk_ships_count
 		sunk_ships.count
 	end
@@ -67,7 +71,13 @@ class Player
 		board.hit_coordinates
 	end
 
+	def attacked_ship coordinate
+		board.attacked_ship coordinate
+	end
 
+	def sunk_ships_coordinates
+		board.sunk_ships_coordinates
+	end
 end
 
 

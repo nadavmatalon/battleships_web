@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-			<link href="/css/style.css" rel="stylesheet">
+		<title>BATTLESHIPS</title>
+		<link href="/css/style.css" rel="stylesheet">
 	</head>
 	<body>
 		<h1>BATTLESHIPS</h1>
 		<h3><%= session[:message] %><h3>
 		<% if session[:num_of_players] == 0 %>
 			<form action='/login_player_one' method='POST'>
-				<input type='text' name='text' placeholder='Name' required autofocus>
+				<input class='text' type='text' name='text' placeholder='Name' required autofocus>
 	 			<button id="button">submit</button>
 			</form>	
 		<% elsif session[:num_of_players] == 1 %>
 			<form action='/login_player_two' method='POST'>
-				<input type='text' name='text' placeholder='Name' required autofocus>
+				<input class='text' type='text' name='text' placeholder='Name' required autofocus>
 	 			<button id="button">submit</button>
 			</form>	
 		<% else %>
@@ -23,4 +24,6 @@
 		<% end %>
 	</body>
 </html>
+
+
 

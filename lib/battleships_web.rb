@@ -7,9 +7,6 @@ set :public, Proc.new {File.join(root, '..', "public")}
 
 enable :sessions
 
-SHIPS_TO_PLACE = 2
-SUNK_SHIPS_TO_WIN = 2
-
 get '/' do
 	session[:game]= create_game
 	session[:num_of_players]= 0
@@ -23,6 +20,7 @@ get '/login' do
 end
 
 post '/login_player_one' do
+	# puts params
 	session[:player_one]= params[:text]
 	session[:num_of_players] += 1
 	set_player_name(player_one, (session[:player_one]).to_s)
@@ -109,7 +107,7 @@ post '/place_ship' do
 		session[:message]= "ship could not be created"
 	end
 
-	if current_player.ship_count < SHIPS_TO_PLACE
+	if current_player.ship_count < Game::SHIPS_TO_PLACE
 
 		erb :setup
 
@@ -130,34 +128,49 @@ get '/setup_player_two' do
 end
 
 get '/play_game' do
+	switch_turn
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	session[:message]= "Let\'s play!"
 	erb :play
 end
 
 post '/player_turn' do
+	switch_turn
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	session[:message]= "#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
 end
 
-post '/player_attack' do	
-	attack_result = game.attack(params[:attack_coord].to_sym)
+post '/player_attack' do
+	coordinate = params[:attack_coord].to_sym
+	attack_result = game.attack(coordinate)
 	if game.over?
 		session[:message]= "GAME_OVER! #{current_player_name.upcase} IS THE WINNER!"	
 		redirect '/end_game'
-	else		
-		session[:message]= "#{current_player_name}, attack result: #{attack_result.to_s.upcase}!"	
+	else
+		if (attack_result == :hit)
+			hit_ship = attacked_ship(coordinate)
+				if hit_ship.sunk?
+					session[:sunk_ships_coordinates] = sunk_ships_coordinates
+					session[:message]= "#{current_player_name}, you sunk a #{hit_ship.class.to_s}!"	
+				else
+					session[:message]= "#{current_player_name}, you hit a ship!"	
+				end
+		else
+			session[:message]= "#{current_player_name}, nothing there!"	
+		end
 	end
-	erb :player_turn
+	erb :player_switch_turn
 end
 
-post "/player_switch_turn" do
-	switch_turn
-	session[:message]= "#{current_player_name}, please select coordinate to attack:"
+post "/player_switch_turn" do 
 	erb :player_turn
 end
 
 get '/end_game' do
-	erb :end_game
+	erb :end_game 
 end
 
 def player_occupied_coordinates
@@ -252,6 +265,30 @@ end
 
 def hit_coordinates
 	game.hit_coordinates
+end
+
+def attacked_ship coordinate
+	game.attacked_ship coordinate
+end
+
+def player_one_floating_ships
+	floating_ships = game.player_one_floating_ships.flatten.map {|ship| ship.class.to_s}
+	floating_ships.sort!
+	floating_ships.join("<br/>")
+end
+
+def player_two_floating_ships
+	floating_ships = game.player_two_floating_ships.flatten.map {|ship| ship.class.to_s}
+	floating_ships.sort!
+	floating_ships.join("<br/>")
+end
+
+def sunk_ships
+	game.sunk_ships
+end
+
+def sunk_ships_coordinates
+	game.sunk_ships_coordinates
 end
 
 def winner_name

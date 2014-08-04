@@ -2,7 +2,8 @@ require_relative "player"
 
 class Game
 
-	SUNK_SHIPS_TO_WIN = 2
+SHIPS_TO_PLACE = 2
+SUNK_SHIPS_TO_WIN = 2
 
 	def initialize
 		set_up_players
@@ -98,6 +99,14 @@ class Game
 		other_player.attacked_cooridnates
 	end
 
+	def player_one_floating_ships
+		player_one.floating_ships
+	end
+
+	def player_two_floating_ships
+		player_two.floating_ships
+	end
+
 	def sunk_ships
 		other_player.sunk_ships
 	end
@@ -110,6 +119,13 @@ class Game
 		other_player.hit_coordinates
 	end
 
+	def attacked_ship coordinate
+		other_player.attacked_ship coordinate
+	end
+
+	def sunk_ships_coordinates
+		other_player.sunk_ships_coordinates
+	end
 end
 
 

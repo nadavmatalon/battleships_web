@@ -83,12 +83,22 @@ class Board
 		ships.select {|ship| ship.sunk?}
 	end
 
+	def floating_ships
+		ships.select {|ship| !ship.sunk?}
+	end
+
+
 	def previously_attacked? coordinate
 		(attacked_cooridnates & [coordinate]).any?
 	end
 
 	def valid? coordinate
 		Coordinate.new(coordinate).valid?
+	end
+
+	def sunk_ships_coordinates
+		sunk_ships_coordinates = sunk_ships.map {|sunk_ship| sunk_ship.hits}
+		sunk_ships_coordinates.flatten!
 	end
 
 end
