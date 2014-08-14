@@ -65,19 +65,19 @@ describe Board do
 		expect(board.ships).to eq [submarine]
 	end
 
-	it "register a succesful attack on a ship" do
+	it "registers a succesful attack on a ship" do
 		board.place(submarine)
 		expect(board.successful_attack_on?(:A1)).to be true
 	end
 
-	it "registers hit on ship if successful attack" do
+	it "registers hits on ships if attacks are successful" do
 		board.place(submarine)
 		board.attack(:A1)
 		expect(submarine.hit?).to be true
 		expect(submarine.sunk?).to be true
 	end
 
-	it "knows which ships sunk" do
+	it "knows which ships have sunk" do
 		board.place(submarine)
 		board.place(destroyer_1)
 		board.attack(:A1)
@@ -91,7 +91,7 @@ describe Board do
 		expect(board.sunk_ships_count).to eq 1
 	end
 
- 	it "cannot attack the same coordinate twice" do
+ 	it "cannot register an attack on the same coordinate twice" do
 		board.attack(:A1)
 		message = "This coordinate was already attacked"
 		expect(board.attack(:A1)).to eq message

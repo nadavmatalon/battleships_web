@@ -15,7 +15,7 @@ describe Ship do
 	let(:ship_3) {Ship.new(coordinates_3)}
 	let(:ship_4) {Ship.new(coordinates_4)}
 
-	it "has some coordinates" do
+	it "has coordinates" do
 		expect(ship_1.coordinates).to eq coordinates_1
 	end
 	
@@ -23,12 +23,8 @@ describe Ship do
 		expect(ship_1.hit(:A1)).to be_hit
 	end
 
-	it "is not hit by defualt" do
+	it "is not hit by default" do
 		expect(ship_1).not_to be_hit
-	end
-
-	it "is not sunk" do
-		expect(ship_1).not_to be_sunk
 	end
 
 	it "can be sunk" do
@@ -36,19 +32,20 @@ describe Ship do
 		expect(ship_1).to be_sunk
 	end
 
-	it "will sink if hit sufficient times" do
+	it "will sink if it's hit a sufficient number of times" do
 		ship_2.hit(:A1)
 		expect(ship_2).not_to be_sunk
 	end
 
-	it "cannot be hit twice if hit at the same coordinate" do
+	it "cannot be hit twice at the same coordinate" do
 		ship_2.hit(:A1)
 		ship_2.hit(:A1)
 		expect(ship_2.hits.count).to eq 1
 	end
 
-	it "cannot be hit at the wrong coordinate" do
+	it "can only have its coordinates hit" do
 		expect(ship_1.can_be_hit_at?(:A2)).to be false
 	end
 
 end
+

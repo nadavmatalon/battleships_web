@@ -1,4 +1,4 @@
-require "./lib/submarine"
+require "./lib/submarine.rb"
 
 describe Submarine do 
 
@@ -10,6 +10,7 @@ describe Submarine do
 
 	it "has a single coordinate" do
 		expect(submarine.coordinates).to eq coordinates_1
+		expect(submarine.coordinates.locations.count).to eq 1
 	end
 
 	it "cannot have more than a single coordinate" do

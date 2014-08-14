@@ -38,25 +38,25 @@ describe Player do
 		expect(player.attack(:A1)).to eq :hit
 	end
 
-	it "knows which coordinates were already attacked" do
+	it "knows if a coordinate was already attacked" do
 		player.attack(:A1)
 		expect(player.previously_attacked?(:A1)).to be true
 		expect(player.previously_attacked?(:A2)).to be false
 	end
 
-	it "knows all coordinates that were attacked" do
+	it "knows all coordinates that were already attacked" do
 		player.attack(:A5)
 		player.attack(:A1)
 		expect(player.attacked_coordinates).to eq [:A1, :A5]
  	end
 
-	it "knows how many ships are on the board" do
+	it "knows how many ships it has on the board" do
 		player.place(submarine)
 		player.place(battleship)
 		expect(player.ship_count).to eq 2		
 	end
 
-	it "knows which ships sunk" do
+	it "knows which of the ships have sunk" do
 		player.place(submarine)
 		player.place(battleship)
 		player.attack(:A1)
@@ -71,10 +71,4 @@ describe Player do
 	end
 
 end
-
-
-
-
-
-
 

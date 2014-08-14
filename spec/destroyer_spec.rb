@@ -1,4 +1,4 @@
-require "./lib/destroyer"
+require "./lib/destroyer.rb"
 
 describe Destroyer do 
 
@@ -10,11 +10,12 @@ describe Destroyer do
 	let(:coordinates_3) {Coordinates.new(c_1, c_2, c_3)}
 	let(:destroyer) {Destroyer.new(coordinates_2)}
 
-	it "has a two coordinates" do
+	it "has two coordinates" do
 		expect(destroyer.coordinates).to eq coordinates_2
+		expect(destroyer.coordinates.locations.count).to eq 2
 	end
 
-	it "cannot have more than a single coordinate" do
+	it "can only have two coordinates" do
 		expect(lambda{Destroyer.new(coordinates_1)}).to raise_error
 		expect(lambda{Destroyer.new(coordinates_3)}).to raise_error
 	end

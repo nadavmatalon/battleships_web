@@ -2,7 +2,6 @@ require "./lib/coordinates.rb"
 
 describe Coordinates do
 
-
 	let(:c_1) {Coordinate.new(:A1)}
 	let(:c_2) {Coordinate.new(:B1)}
 	let(:c_3) {Coordinate.new(:C1)}
