@@ -62,38 +62,59 @@ get '/setup_player_one' do
 	case current_player.ship_count
 		when 0
 			session[:current_ship] = :battleship
-			session[:message] = "#{current_player.name}, Your first ship is a Battleship!\n
-								 To place it click on 4 consequtive squares and then hit 'Submit'"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, Your first ship is a Battleship!\n
+									 To place it click on 4 consequtive squares and then hit 'Submit'"			
+			end						 
+
 		when 1
 			session[:current_ship] = :cruiser
-			session[:message] = "#{current_player.name}, well done! Now place your First Cruiser\n
-								 by clicking on 3 consequtive squares"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, well done! Now place your First Cruiser\n
+									 by clicking on 3 consequtive squares"
+			end
 		when 2
 			session[:current_ship] = :cruiser
-			session[:message] = "#{current_player.name}, that's awesome! Do the same to place your Second Cruiser\n"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, that's awesome! Do the same to place your Second Cruiser\n"
+			end
 		when 3
 			session[:current_ship] = :destroyer
-			session[:message] = "#{current_player.name}, it's time for Destroyers! To place your First Destroyer\n
-								 click on 2 consequtive squares and then hit 'Submit'"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, it's time for Destroyers! To place your First Destroyer\n
+									 click on 2 consequtive squares and then hit 'Submit'"
+			end
 		when 4
 			session[:current_ship] = :destroyer
-			session[:message] = "#{current_player.name}, great! Now place your Second Destroyer\n"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, great! Now place your Second Destroyer\n"
+			end
 		when 5
 			session[:current_ship] = :destroyer
-			session[:message] = "#{current_player.name}, beautiful! Go on and place your Third Destroyer\n"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, beautiful! Go on and place your Third Destroyer\n"
+			end
 		when 6
 			session[:current_ship] = :submarine
-			session[:message] = "#{current_player.name}, here come Submarines! To place your First Submarine\n
-								 select a single square and then hit 'Submit'"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, here come Submarines! To place your First Submarine\n
+									 select a single square and then hit 'Submit'"
+			end
 		when 7
 			session[:current_ship] = :submarine
-			session[:message] = "#{current_player.name}, what a setup! Please choose where to place your Second Submarine\n"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, what a setup! Please choose where to place your Second Submarine\n"
+			end
 		when 8
 			session[:current_ship] = :submarine
-			session[:message] = "#{current_player.name}, nearly there! Please place your Third Submarine\n"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, nearly there! Please place your Third Submarine\n"
+			end
 		when 9
 			session[:current_ship] = :submarine
-			session[:message] = "#{current_player.name}, last ship! place your Fourth Submarine and you're done!\n"
+			if session[:setup_error] == false
+				session[:message] = "#{current_player.name}, last ship! place your Fourth Submarine and you're done!\n"
+			end
 	end
 	erb :setup
 end
@@ -145,9 +166,10 @@ post '/place_ship' do
 
 	if !ship.nil?
 		place(ship)
+		session[:setup_error] = false
 	else
+		session[:setup_error] = true
 		session[:message] = "Sorry, the #{session[:current_ship].capitalize} could not be placed at these coordinates, please try again"
-	 	puts "Sorry, the #{session[:current_ship].capitalize} could not be placed at these coordinates, please try again"
 	end
 
 	if current_player.ship_count < Game::SHIPS_TO_PLACE
