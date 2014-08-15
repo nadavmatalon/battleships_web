@@ -120,77 +120,103 @@ get '/setup_player_one' do
 end
 
 post '/place_ship' do
-	# ship_type = (params[:ship_type]).to_sym
-	coords = params[:coords].split(", ").sort.map { |s| s.to_sym }
-	ship = nil
 
-	case session[:current_ship] 
-
-		when :battleship
-			if coords.count == 4
-				coordinate_1 = Coordinate.new(coords[0])
-				coordinate_2 = Coordinate.new(coords[1])
-				coordinate_3 = Coordinate.new(coords[2])
-				coordinate_4 = Coordinate.new(coords[3])
-				coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3, coordinate_4)
-				if coordinates.valid?
-					ship = Battleship.new(coordinates)
-				end
-			end
-		when :cruiser
-			if coords.count == 3
-				coordinate_1 = Coordinate.new(coords[0])
-				coordinate_2 = Coordinate.new(coords[1])
-				coordinate_3 = Coordinate.new(coords[2])
-				coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3)
-				if coordinates.valid?
-					ship = Cruiser.new(coordinates)
-				end
-			end
-		when :destroyer
-			if coords.count == 2
-				coordinate_1 = Coordinate.new(coords[0])
-				coordinate_2 = Coordinate.new(coords[1])
-				coordinates = Coordinates.new(coordinate_1, coordinate_2)
-				if coordinates.valid?
-					ship = Destroyer.new(coordinates)
-				end
-			end
-		when :submarine
-			if coords.count == 1
-				coordinate_1 = Coordinate.new(coords[0])
-				coordinates = Coordinates.new(coordinate_1)
-				ship = Submarine.new(coordinates)
-			end
+	if session[:current_player_done] == true
+		if current_player == player_one
+			session[:current_player_done] = false
+			game.switch_turn
+			redirect '/setup_player_one'
+		else
+			game.switch_turn
+			redirect '/play_game'
 		end
-
-	if !ship.nil?
-		place(ship)
-		session[:setup_error] = false
 	else
-		session[:setup_error] = true
-		session[:message] = "Sorry, the #{session[:current_ship].capitalize} could not be placed at these coordinates, please try again"
+		coords = params[:coords].split(", ").sort.map { |s| s.to_sym }
+		ship = nil
+		case session[:current_ship]
+			when :battleship
+				if coords.count == 4
+					coordinate_1 = Coordinate.new(coords[0])
+					coordinate_2 = Coordinate.new(coords[1])
+					coordinate_3 = Coordinate.new(coords[2])
+					coordinate_4 = Coordinate.new(coords[3])
+					coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3, coordinate_4)
+					if coordinates.valid?
+						ship = Battleship.new(coordinates)
+					end
+				end
+			when :cruiser
+				if coords.count == 3
+					coordinate_1 = Coordinate.new(coords[0])
+					coordinate_2 = Coordinate.new(coords[1])
+					coordinate_3 = Coordinate.new(coords[2])
+					coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3)
+					if coordinates.valid?
+						ship = Cruiser.new(coordinates)
+					end
+				end
+			when :destroyer
+				if coords.count == 2
+					coordinate_1 = Coordinate.new(coords[0])
+					coordinate_2 = Coordinate.new(coords[1])
+					coordinates = Coordinates.new(coordinate_1, coordinate_2)
+					if coordinates.valid?
+						ship = Destroyer.new(coordinates)
+					end
+				end
+			when :submarine
+				if coords.count == 1
+					coordinate_1 = Coordinate.new(coords[0])
+					coordinates = Coordinates.new(coordinate_1)
+					ship = Submarine.new(coordinates)
+				end
+		end
+		if !ship.nil?
+			place(ship)
+			session[:setup_error] = false
+		else
+			session[:setup_error] = true
+			session[:message] = "Sorry, the #{session[:current_ship].capitalize} could not be placed at these coordinates, please try again"
+		end
 	end
 
 	if current_player.ship_count < Game::SHIPS_TO_PLACE
-		erb :setup
-		redirect '/setup_player_one'
-	# else
-	# 	if current_player == player_one
-	# 		game.switch_turn
-	# 		redirect '/setup_player_two'
-	# 	else
-	# 		game.switch_turn
-	# 		redirect '/play_game'
-	# 	end
+		session[:current_player_done] = false
+	else
+		session[:current_player_done] = true
+		if current_player == player_one
+			session[:message] = "#{current_player.name}, all done! click 'Next' and let #{other_player.name} get set!\n"
+		else
+			session[:message] = "#{current_player.name}, all done! click 'Next' to start the game!\n"
+		end	
 	end
+	erb :setup
+	redirect '/setup_player_one'
+	# elsif current_player.ship_count == Game::SHIPS_TO_PLACE
+	# 	if current_player == player_one
+	# 		session[:message] = "#{current_player.name}, excellent work! please click 'Next' and let #{other_player.name} take over"
+	# 		session[:current_player_done] = true
+	# 		erb :setup
+	# 		redirect '/setup_player_one'
+	# 	else
+
+	# 	end
+
+
+	# if current_player == player_one
+	# 	game.switch_turn
+	# 	redirect '/setup_player_two'
+	# else
+	# 	game.switch_turn
+	# 	redirect '/play_game'
+	# end
 end
 
-get '/setup_player_two' do
-	session[:message]= "#{session[:player_one]}, place your ships (but don't let 
-						#{session[:player_two]} peek!)"
-	erb :setup
-end
+# get '/setup_player_two' do
+# 	session[:message]= "#{current_player.name}, Your first ship is a Battleship!\n
+# 						To place it click on 4 consequtive squares and then hit 'Submit'"
+# 	erb :setup
+# end
 
 get '/play_game' do
 	switch_turn

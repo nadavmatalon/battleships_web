@@ -1,13 +1,11 @@
 
 <form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
 	<div class="setup-buttons-container">
-		<select id="selected_ship" name="selected_ship" onChange="ship_size=this.value; ship_type.value=this.options[this.selectedIndex].text;">
-			<option value="1" selected>submarine</option>
-			<option value='2'>destroyer</option>
-			<option value='3'>cruiser</option>
-			<option value='4'>battleship</option>
-		</select>
-		<input type="submit" class="button" id="setup-submit-button" name="submit" value="Submit" onclick=""><br/>
+		<% if session[:current_player_done] == false %>
+			<input type="submit" class="button" id="setup-submit-button" name="submit" value="Submit" onclick=""><br/>
+		<% else %>
+			<input type="submit" class="button" id="setup-submit-button" name="submit" value="Next" onclick=""><br/>
+		<% end %>
 	</div>
 	<div class="setup-grid">
  		<input class='legend' type='button' value=' ' disabled>
