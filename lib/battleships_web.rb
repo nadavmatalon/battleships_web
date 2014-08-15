@@ -197,14 +197,6 @@ post '/place_ship' do
 	redirect '/setup_player_one'
 end
 
-# get '/play_game' do
-# 	switch_turn
-# 	session[:player_one_ships] = player_one_floating_ships
-# 	session[:player_two_ships] = player_two_floating_ships
-# 	session[:message]= "Click 'Continue' to begin the game!"
-# 	erb :play
-# end
-
 get '/player_turn' do
 	session[:player_one_ships] = player_one_floating_ships
 	session[:player_two_ships] = player_two_floating_ships
@@ -361,3 +353,14 @@ end
 def winner_name
 	game.winner_name
 end
+
+def grid_array
+	coord_str = ""
+	for i in "A".."J"
+		for j in "1".."10"
+			string += i+j+", "
+		end
+	end
+	string.split(', ')
+end
+
