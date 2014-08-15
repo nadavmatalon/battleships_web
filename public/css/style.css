@@ -8,28 +8,133 @@ body {
 
 }
 
-h1 {
-	font-weight: 700;
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+*:focus {
+    outline: 0;
+}
+
+.page-title {
+	width: 80%;
+	height: 83px;
+	border: 1px solid rgb(150, 150, 150);
+	text-align: -webkit-center;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+}
+
+.page-title > p {
+	font-weight: 800;
 	color: blue;
-	font-size: 56px;
+	font-size: 53px;
 	font-family: arial;
 	letter-spacing: 1px;
 	text-shadow: 1px 1px 1px black;
 	border-color: black;
-
-/*	font-style: bold;
-	color: blue;
-	font-size: 55px;
-	font-family: monospace;
-	letter-spacing: 3px;*/
-
+	display: block;
+	margin-top: 2px;
+	margin-top: 30px;
 }
 
-h2 {
-  line-height: 22px;
-   font-family: monospace;
-   font-size: 15px;
-   letter-spacing: 0px;
+.session-message-container {
+	width: 80%;
+	height: 55px;
+	border: 1px solid rgb(150, 150, 150);
+	text-align: -webkit-center;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.session-message-container > p {
+	letter-spacing: -0.1px;
+	word-spacing: -0.4px;
+	font-weight: 500;
+}
+
+.button {
+	height: 25px;
+	width: 65px;
+	font-size: 13px;
+	color: black;
+	letter-spacing: 0.4px;
+	font-weight: 500;
+}
+
+.button:hover {
+	color: orange;
+}
+
+#start-button {
+	margin-top: 20px;
+}
+
+#login-button {
+	margin-top: 20px;
+}
+
+.player-name-box {
+	width: 200px;
+	height: 20px;
+	font-size: 14.2px;
+	padding-left: 2px;
+	line-height: 18px;
+	margin-top: 19px;
+	display: inline-block;
+	letter-spacing: 0.3px;
+}
+
+#setup-button {
+	margin-top: 20px;
+}
+
+.setup-buttons-container {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+	margin-bottom: 25px;
+}
+
+#setup-submit-button {
+	margin-top: 20px;
+	color: black;
+	font-size: 13px;
+	width: 80px;
+	height: 26px;
+	border: 1px solid rgb(150, 150, 150);
+	border-radius: 3px;
+	display: inline;
+}
+
+#setup-submit-button:hover {
+	color: orange;
+}
+
+.setup-grid {
+	display: inline-table;
+	width: 80%;
+	border: 1px solid rgb(150, 150, 150);
+	padding-left: 6px;
+}
+
+.setup-grid > input {
+	margin-left: 1px;
+	margin-bottom: 1px;
+}
+
+.main-body {
+	width: 80%;
+	min-height: 600px;
+	border: 1px solid rgb(150, 150, 150);
+	text-align: -webkit-center;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .legend {

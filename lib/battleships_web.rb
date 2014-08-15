@@ -7,24 +7,29 @@ set :public, Proc.new {File.join(root, '..', "public")}
 
 enable :sessions
 
-get '/' do
-	session[:game]= create_game
-	session[:num_of_players]= 0
-	session[:message]= "Player One, please enter your name:"
-	erb :index
-end
-
 get '/login' do
 	redirect '/'
 end
 
+get '/' do
+	session[:game]= create_game
+	session[:num_of_players] = 0
+	session[:message]= "Hello, click start to begin"
+	erb :index
+end
+
+post '/' do
+	session[:num_of_players] == 0
+	session[:message]= "Player One, please enter your name"
+	erb :login
+end
+
 post '/login_player_one' do
-	# puts params
 	session[:player_one]= params[:text]
 	session[:num_of_players] += 1
 	set_player_name(player_one, (session[:player_one]).to_s)
-	session[:message]= "Player Two, please enter your name:"
-	erb :index
+	session[:message]= "Player Two, please enter your name"
+	erb :login
 end
 
 post '/login_player_two' do
@@ -34,15 +39,16 @@ post '/login_player_two' do
 		set_player_name(player_two, (session[:player_two]).to_s)
 		redirect '/setup'
 	else
-		session[:message]= "This is not a valid name, please try again:"
-		erb :index
+		session[:message]= "Players names can't be identical, please try again"
+		erb :login
 	end
 end
 
 get '/setup' do
 	if session[:num_of_players] == 2
-		session[:message]= "Welcome #{session[:player_one]} and #{session[:player_two]}!"
-		erb :index
+		session[:message]= "Welcome #{session[:player_one]} and #{session[:player_two]}, 
+							let's set up the boards!"
+		erb :login
 	else
 		redirect '/'
 	end
@@ -53,7 +59,8 @@ post '/setup' do
 end
 
 get '/setup_player_one' do
-	session[:message]= "#{session[:player_one]}, please select coordinates for your ships:"
+	session[:message]= "#{session[:player_one]}, place your ships (but don't let 
+						#{session[:player_two]} peek!)"
 	erb :setup
 end
 
@@ -122,7 +129,8 @@ post '/place_ship' do
 end
 
 get '/setup_player_two' do
-	session[:message]= "#{session[:player_two]}, please select coordinates for your ships:"
+	session[:message]= "#{session[:player_one]}, place your ships (but don't let 
+						#{session[:player_two]} peek!)"
 	erb :setup
 end
 
@@ -233,9 +241,9 @@ end
 
 def place_ships_sequence
 	place :battleship
-	# 2.times {place :cruiser}
-	# 3.times {place :destroyer}
-	# 4.times {place :submarine}
+	2.times {place :cruiser}
+	3.times {place :destroyer}
+	4.times {place :submarine}
 end
 
 def place ship
