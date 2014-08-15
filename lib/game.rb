@@ -2,7 +2,7 @@ require_relative "player"
 
 class Game
 
-SHIPS_TO_PLACE = 2
+SHIPS_TO_PLACE = 10
 SUNK_SHIPS_TO_WIN = 2
 
 	def initialize

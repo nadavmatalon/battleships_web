@@ -20,6 +20,7 @@ class Coordinates
 
 	def sequential_locations?
 		return true if single_coordinate?
+		locations.sort_by! { |coordinate| coordinate.convert_to_number }
 		!sequence.include?(false)
 	end
 

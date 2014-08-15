@@ -59,72 +59,108 @@ post '/setup' do
 end
 
 get '/setup_player_one' do
-	session[:message]= "#{session[:player_one]}, place your ships (but don't let 
-						#{session[:player_two]} peek!)"
+	case current_player.ship_count
+		when 0
+			session[:current_ship] = :battleship
+			session[:message] = "#{current_player.name}, Your first ship is a Battleship!\n
+								 To place it click on 4 consequtive squares and then hit 'Submit'"
+		when 1
+			session[:current_ship] = :cruiser
+			session[:message] = "#{current_player.name}, well done! Now place your First Cruiser\n
+								 by clicking on 3 consequtive squares"
+		when 2
+			session[:current_ship] = :cruiser
+			session[:message] = "#{current_player.name}, that's awesome! Do the same to place your Second Cruiser\n"
+		when 3
+			session[:current_ship] = :destroyer
+			session[:message] = "#{current_player.name}, it's time for Destroyers! To place your First Destroyer\n
+								 click on 2 consequtive squares and then hit 'Submit'"
+		when 4
+			session[:current_ship] = :destroyer
+			session[:message] = "#{current_player.name}, great! Now place your Second Destroyer\n"
+		when 5
+			session[:current_ship] = :destroyer
+			session[:message] = "#{current_player.name}, beautiful! Go on and place your Third Destroyer\n"
+		when 6
+			session[:current_ship] = :submarine
+			session[:message] = "#{current_player.name}, here come Submarines! To place your First Submarine\n
+								 select a single square and then hit 'Submit'"
+		when 7
+			session[:current_ship] = :submarine
+			session[:message] = "#{current_player.name}, what a setup! Please choose where to place your Second Submarine\n"
+		when 8
+			session[:current_ship] = :submarine
+			session[:message] = "#{current_player.name}, nearly there! Please place your Third Submarine\n"
+		when 9
+			session[:current_ship] = :submarine
+			session[:message] = "#{current_player.name}, last ship! place your Fourth Submarine and you're done!\n"
+	end
 	erb :setup
 end
 
 post '/place_ship' do
-	ship_type=(params[:ship_type]).to_sym
-	coords=params[:coords].split(", ").sort.map { |s| s.to_sym }
-	ship=nil
-		case ship_type
-			when :submarine
-				if coords.count == 1
-					coordinate_1 = Coordinate.new(coords[0])
-					coordinates = Coordinates.new(coordinate_1)
-					ship = Submarine.new(coordinates)
+	# ship_type = (params[:ship_type]).to_sym
+	coords = params[:coords].split(", ").sort.map { |s| s.to_sym }
+	ship = nil
+
+	case session[:current_ship] 
+
+		when :battleship
+			if coords.count == 4
+				coordinate_1 = Coordinate.new(coords[0])
+				coordinate_2 = Coordinate.new(coords[1])
+				coordinate_3 = Coordinate.new(coords[2])
+				coordinate_4 = Coordinate.new(coords[3])
+				coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3, coordinate_4)
+				if coordinates.valid?
+					ship = Battleship.new(coordinates)
 				end
-			when :destroyer
-				if coords.count == 2
-					coordinate_1 = Coordinate.new(coords[0])
-					coordinate_2 = Coordinate.new(coords[1])
-					coordinates = Coordinates.new(coordinate_1, coordinate_2)
-					if coordinates.valid?
-						ship = Destroyer.new(coordinates)
-					end
+			end
+		when :cruiser
+			if coords.count == 3
+				coordinate_1 = Coordinate.new(coords[0])
+				coordinate_2 = Coordinate.new(coords[1])
+				coordinate_3 = Coordinate.new(coords[2])
+				coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3)
+				if coordinates.valid?
+					ship = Cruiser.new(coordinates)
 				end
-			when :cruiser
-				if coords.count == 3
-					coordinate_1 = Coordinate.new(coords[0])
-					coordinate_2 = Coordinate.new(coords[1])
-					coordinate_3 = Coordinate.new(coords[2])
-					coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3)
-					if coordinates.valid?
-						ship = Cruiser.new(coordinates)
-					end
+			end
+		when :destroyer
+			if coords.count == 2
+				coordinate_1 = Coordinate.new(coords[0])
+				coordinate_2 = Coordinate.new(coords[1])
+				coordinates = Coordinates.new(coordinate_1, coordinate_2)
+				if coordinates.valid?
+					ship = Destroyer.new(coordinates)
 				end
-			when :battleship
-				if coords.count == 4
-					coordinate_1 = Coordinate.new(coords[0])
-					coordinate_2 = Coordinate.new(coords[1])
-					coordinate_3 = Coordinate.new(coords[2])
-					coordinate_4 = Coordinate.new(coords[3])
-					coordinates = Coordinates.new(coordinate_1, coordinate_2, coordinate_3, coordinate_4)
-					if coordinates.valid?
-						ship = Battleship.new(coordinates)
-					end
-				end
+			end
+		when :submarine
+			if coords.count == 1
+				coordinate_1 = Coordinate.new(coords[0])
+				coordinates = Coordinates.new(coordinate_1)
+				ship = Submarine.new(coordinates)
+			end
 		end
+
 	if !ship.nil?
 		place(ship)
-		session[:message]= "#{current_player_name}, #{ship_type.to_s.capitalize} placed at coordinates: #{coords.join(', ')}"
 	else
-		session[:message]= "ship could not be created"
+		session[:message] = "Sorry, the #{session[:current_ship].capitalize} could not be placed at these coordinates, please try again"
+	 	puts "Sorry, the #{session[:current_ship].capitalize} could not be placed at these coordinates, please try again"
 	end
 
 	if current_player.ship_count < Game::SHIPS_TO_PLACE
-
 		erb :setup
-
-	else
-		if current_player == player_one
-			game.switch_turn
-			redirect '/setup_player_two'
-		else
-			game.switch_turn
-			redirect '/play_game'
-		end
+		redirect '/setup_player_one'
+	# else
+	# 	if current_player == player_one
+	# 		game.switch_turn
+	# 		redirect '/setup_player_two'
+	# 	else
+	# 		game.switch_turn
+	# 		redirect '/play_game'
+	# 	end
 	end
 end
 
@@ -230,20 +266,6 @@ end
 
 def set_player_name player, new_name
 	game.set_player_name(player, new_name)
-end
-
-def board_setup_stage
-	2.times do
-		place_ships_sequence
-		switch_turn
-	end
-end
-
-def place_ships_sequence
-	place :battleship
-	2.times {place :cruiser}
-	3.times {place :destroyer}
-	4.times {place :submarine}
 end
 
 def place ship
