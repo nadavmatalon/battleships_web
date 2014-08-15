@@ -10,7 +10,6 @@ enable :sessions
 get '/' do
 	session[:game]= create_game
 	session[:num_of_players]= 0
-	game_created = !game.nil?
 	session[:message]= "Player One, please enter your name:"
 	erb :index
 end
