@@ -92,6 +92,11 @@ textarea:focus, input:focus{
 	margin-top: 20px;
 }
 
+#continue-to-play-button {
+	margin-top: 20px;
+	width: 78px;
+}
+
 .setup-buttons-container {
 	width: 80%;
 	margin-left: auto;

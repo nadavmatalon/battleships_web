@@ -14,18 +14,21 @@ end
 get '/' do
 	session[:game]= create_game
 	session[:num_of_players] = 0
-	session[:message]= "Hello, click start to begin"
+	session[:num_of_players] == 0
+	session[:player_one] = ""
+	session[:player_two] = ""
+	session[:current_player_done] = false
+		session[:message]= "Hello, click start to begin"
 	erb :index
 end
 
 post '/' do
-	session[:num_of_players] == 0
 	session[:message]= "Player One, please enter your name"
 	erb :login
 end
 
 post '/login_player_one' do
-	session[:player_one]= params[:text]
+	session[:player_one] = params[:text]
 	session[:num_of_players] += 1
 	set_player_name(player_one, (session[:player_one]).to_s)
 	session[:message]= "Player Two, please enter your name"
@@ -128,7 +131,7 @@ post '/place_ship' do
 			redirect '/setup_player_one'
 		else
 			game.switch_turn
-			redirect '/play_game'
+			redirect '/player_turn'
 		end
 	else
 		coords = params[:coords].split(", ").sort.map { |s| s.to_sym }
@@ -192,45 +195,28 @@ post '/place_ship' do
 	end
 	erb :setup
 	redirect '/setup_player_one'
-	# elsif current_player.ship_count == Game::SHIPS_TO_PLACE
-	# 	if current_player == player_one
-	# 		session[:message] = "#{current_player.name}, excellent work! please click 'Next' and let #{other_player.name} take over"
-	# 		session[:current_player_done] = true
-	# 		erb :setup
-	# 		redirect '/setup_player_one'
-	# 	else
-
-	# 	end
-
-
-	# if current_player == player_one
-	# 	game.switch_turn
-	# 	redirect '/setup_player_two'
-	# else
-	# 	game.switch_turn
-	# 	redirect '/play_game'
-	# end
 end
 
-# get '/setup_player_two' do
-# 	session[:message]= "#{current_player.name}, Your first ship is a Battleship!\n
-# 						To place it click on 4 consequtive squares and then hit 'Submit'"
-# 	erb :setup
+# get '/play_game' do
+# 	switch_turn
+# 	session[:player_one_ships] = player_one_floating_ships
+# 	session[:player_two_ships] = player_two_floating_ships
+# 	session[:message]= "Click 'Continue' to begin the game!"
+# 	erb :play
 # end
 
-get '/play_game' do
-	switch_turn
+get '/player_turn' do
 	session[:player_one_ships] = player_one_floating_ships
 	session[:player_two_ships] = player_two_floating_ships
-	session[:message]= "Let\'s play!"
-	erb :play
+	session[:message] = "#{current_player_name}, please select coordinate to attack:"
+	erb :player_turn
 end
 
 post '/player_turn' do
 	switch_turn
 	session[:player_one_ships] = player_one_floating_ships
 	session[:player_two_ships] = player_two_floating_ships
-	session[:message]= "#{current_player_name}, please select coordinate to attack:"
+	session[:message] = "#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
 end
 
@@ -253,10 +239,14 @@ post '/player_attack' do
 			session[:message]= "#{current_player_name}, nothing there!"	
 		end
 	end
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	erb :player_switch_turn
 end
 
 post "/player_switch_turn" do 
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	erb :player_turn
 end
 
