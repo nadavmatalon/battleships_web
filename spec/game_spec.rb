@@ -12,7 +12,6 @@ describe Game do
 	let(:c8) {Coordinate.new(:A8)}
 	let(:c9) {Coordinate.new(:A9)}
 	let(:c10) {Coordinate.new(:A10)}
-
 	let(:c11) {Coordinate.new(:B1)}
 	let(:c12) {Coordinate.new(:B2)}
 	let(:c13) {Coordinate.new(:B3)}
