@@ -1,16 +1,30 @@
 
-<% if session[:num_of_players] == 0 %>
-	<form action='/login_player_one' method='POST'>
-		<input class='player-name-box' type='text' name='text' placeholder='Player One name' autofocus>
-			<button class="button" id="login-button">Submit</button>
-	</form>	
-<% elsif session[:num_of_players] == 1 %>
-	<form action='/login_player_two' method='POST'>
-		<input class='player-name-box' type='text' name='text' placeholder='Player Two Name' autofocus>
-			<button class="button" id="login-button">Submit</button>
-	</form>	
-<% else %>
-	<form action='/setup' method='POST'>
-		 <button class="button" id="setup-button" autofocus>Setup</button>
-	</form>
-<% end %>
+<div class="buttons-container">
+	<% if session[:num_of_players] == 0 %>
+		<form action='/login_player_one' method='POST'>
+			<input class='player-name-box' type='text' name='text' placeholder='Player One name' autofocus>
+				<button class="button" id="login-button">Submit</button>
+		</form>	
+	<% elsif session[:num_of_players] == 1 %>
+		<form action='/login_player_two' method='POST'>
+			<input class='player-name-box' type='text' name='text' placeholder='Player Two Name' autofocus>
+				<button class="button" id="login-button">Submit</button>
+		</form>	
+	<% else %>
+		<form action='/setup' method='POST'>
+			 <button class="button" id="setup-button" autofocus>Setup</button>
+		</form>
+	<% end %>
+</div>
+<div class="preview-grid">
+	<input class="legend color-white" type='button' value=' ' disabled>
+	<% for i in 1..10 %>
+		<input class="legend color-white" type='button' value="<%= i %>" disabled>
+	<% end %><br/>
+	<% for i in "A".."J" %>		
+		<input class="legend color-white" type='button' value="<%= i %>" disabled>
+		<% for j in 1..10 %>
+			<input class='coord' type='button' value="<%= i.to_s+j.to_s %>" disabled>		
+		<% end %><br/>
+	<% end %><br/>
+</div>

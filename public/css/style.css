@@ -178,6 +178,17 @@ textarea:focus, input:focus{
 	color: blue;
 }
 
+.preview-grid {
+	display: inline-table;
+	width: 560px;
+	/*border: 1px solid rgb(150, 150, 150);*/
+}
+
+.preview-grid > input {
+	margin-left: 1px;
+	margin-bottom: 1px;
+}
+
 .setup-grid {
 	display: inline-table;
 	width: 560px;
