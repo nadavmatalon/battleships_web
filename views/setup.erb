@@ -1,4 +1,3 @@
-
 <form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
 	<div class="buttons-container">
 		<% if session[:current_player_done] == false %>
@@ -9,44 +8,46 @@
 			<input type="submit" class="button" id="setup-submit-button" name="submit" value="Next" autofocus onclick=""><br/>
 		<% end %>
 	</div>
-	<div class="player_ships player_one_ships">
-		<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
-		<div class="player_ships_underline"></div>
-		<% if session[:player_one_ships] != "" %>
-			<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
-				<p class="ship" ><%= ship %></p>
-			<% end %>
-		<% else %>
-				<p class="ship" >No ships yet</p>
-		<% end %>
-	</div>
-	<div class="setup-grid">
- 		<input class="legend color-white" type='button' value=' ' disabled>
-		<% for i in 1..10 %>
-			<input class="legend color-white" type='button' value="<%= i %>" disabled>
-		<% end %><br/>
-		<% for i in "A".."J" %>		
-			<input class="legend color-white" type='button' value="<%= i %>" disabled>
-			<% for j in 1..10 %>
-				<% if current_player_occupied_coordinates.include?("#{i.to_s+j.to_s}".to_sym) %>
-					<input class='selected' type='button' value="<%= i.to_s+j.to_s %>" disabled>
-				<% else %>
-					<input class='coord' type='button' value="<%= i.to_s+j.to_s %>" onclick="togglestyle(this);">		
+	<div class="page-container">
+		<div class="player_ships player_one_ships">
+			<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
+			<div class="player_ships_underline"></div>
+			<% if session[:player_one_ships] != "" %>
+				<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
+					<p class="ship" ><%= ship %></p>
 				<% end %>
-			<% end %><br/>
-		<% end %><br/>
-	</div>
-	<div class="player_ships player_two_ships">
-		<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
-		<div class="player_ships_underline"></div>
-		<% if session[:player_two_ships] != "" %>
-			<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
-				<p class="ship" ><%= ship %></p>
+			<% else %>
+					<p class="ship" >No ships yet</p>
 			<% end %>
-		<% else %>
-				<p class="ship" >No ships yet</p>
-		<% end %>
+		</div>
+			<div class="setup-grid">
+	 			<input class="legend color-white" type='button' value=' ' disabled>
+				<% for i in 1..10 %>
+					<input class="legend color-white" type='button' value="<%= i %>" disabled>
+				<% end %><br/>
+				<% for i in "A".."J" %>		
+					<input class="legend color-white" type='button' value="<%= i %>" disabled>
+					<% for j in 1..10 %>
+						<% if current_player_occupied_coordinates.include?("#{i.to_s+j.to_s}".to_sym) %>
+							<input class='selected' type='button' value="<%= i.to_s+j.to_s %>" disabled>
+						<% else %>
+							<input class='coord' type='button' value="<%= i.to_s+j.to_s %>" onclick="togglestyle(this);">		
+						<% end %>
+					<% end %><br/>
+				<% end %><br/>
+				<input type='hidden' id='ship_type' name='ship_type' value="submarine">
+				<input type='hidden' id='coords' name='coords'>
+			</div>
+		<div class="player_ships player_two_ships">
+			<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
+			<div class="player_ships_underline"></div>
+			<% if session[:player_two_ships] != "" %>
+				<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
+					<p class="ship" ><%= ship %></p>
+				<% end %>
+			<% else %>
+					<p class="ship" >No ships yet</p>
+			<% end %>
+		</div>
 	</div>
-	<input type='hidden' id='ship_type' name='ship_type' value="submarine">
-	<input type='hidden' id='coords' name='coords'>
 </form>
