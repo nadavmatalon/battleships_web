@@ -1,254 +1,63 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>BATTLESHIPS</title>
-		<link href="/css/style.css" rel="stylesheet">
-		<script></script>
-	</head>
-	<body>
-		<table>
-			<tr>
-				<td width="550px">
-					<table>
-						<tr>
-							<td>
-								<h1>BATTLESHIPS</h1>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<h2><%= session[:message] %></h2>
-							</td>
-						</tr>
-						<tr>
-							<td height="30px">
-								<form name="player_turn" id="player_turn" action="/player_turn" method="POST">
-				 					<button id="button" autofocus>Next Player</button>
-								</form>
-							</td>
-						</tr>
-						<tr>
-							<td>
-						
-								<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
 
-								<input class='legend' type='button' value=" " disabled>
-								<% for n in 1..10 do %>
-									<input class='legend' type='button' value="<%=n%>" disabled>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='A' disabled>
-								<% array = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='B' disabled>
-								<% array = ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='C' disabled>
-								<% array = ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='D' disabled>
-								<% array = ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='E' disabled>
-								<% array = ["E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='F' disabled>
-								<% array = ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='G' disabled>
-								<% array = ["G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10"] %>
-									<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='H' disabled>
-								<% array = ["H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "H10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
-
-								<input class='legend' type='button' value='I' disabled>
-								<% array = ["I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "I10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %><br/>
+<div class="buttons-container">
+	<% if session[:game_over] == false %>
+		<form name="player_turn" id="player_turn" action="/player_turn" method="POST">
+			<button class="button" id="next-move-button" autofocus>Switch Turn</button>
+		</form>
+	<% else %>
+		<form name="new_game" id="new_game" action="/" method="GET">
+			<button class="button" id="new-game-button" autofocus>New Game</button>
+		</form>
+	<% end %>
+</div>
+<div class="player_ships player_one_ships">
+	<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
+	<div class="player_ships_underline"></div>
+	<% if session[:player_one_ships] != "" %>
+		<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
+			<p class="ship" ><%= ship %></p>
+		<% end %>
+	<% else %>
+		<p class="ship" >No ships left</p>
+	<% end %>
+</div>
+<div class="play-grid">
+	<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
+		<input class="legend color-grey" type='button' value=" " disabled>
+		<% for i in 1..10 %>
+			<input class="legend color-grey" type='button' value="<%= i %>" disabled>
+		<% end %><br/>
+		<% for i in "A".."J" %>		
+			<input class="legend color-grey" type='button' value="<%= i %>" disabled>
+			<% for j in "1".."10" %>
+				<% coord = (i+j).to_sym %>
+				<% if other_player.attacked_coordinates.include?(coord) %>
+					<% if hit_coordinates.include?(coord) %>
+						<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?(coord) %>
+							<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
+						<% else %>
+							<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
+						<% end %>
+					<% else %>
+						<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
+					<% end %>
+				<% else %>
+					<input class='coord' name="attack_coord" type='submit' value="<%= coord.to_s %>" disabled>
+				<% end %>
+			<% end %><br/>
+		<% end %><br/>
+	</form>
+</div>
+<div class="player_ships player_two_ships">
+	<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
+	<div class="player_ships_underline"></div>
+	<% if session[:player_two_ships] != "" %>
+		<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
+			<p class="ship" ><%= ship %></p>
+		<% end %>
+	<% else %>
+		<p class="ship" >No ships left</p>
+	<% end %>
+</div>
 
 
-								<input class='legend' type='button' value='J' disabled>
-								<% array = ["J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10"] %>
-								<% for n in 0..9 do %>
-									<% if other_player.attacked_coordinates.include?((array[n]).to_sym) %>
-										<% if hit_coordinates.include?((array[n]).to_sym) %>
-												<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?((array[n]).to_sym) %>
-														<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
-												<% else %>
-													<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
-												<% end %>
-										<% else %>
-													<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
-										<% end %>
-									<% else %>
-										<input class='coord' name="attack_coord" type='submit' value="<%=array[n]%>" disabled>
-									<% end %>
-								<% end %>
-								</form>
-							</td>
-						</tr>
-					</table>
-
-				</td>
-				<td width="40px"></td>
-				<td valign="top" width= "150px">
-					<table>
-						<tr height="150px">
-							<td>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<h2><%= "#{session[:player_one]}\'s Ships:" %></h2>
-								<%= session[:player_one_ships] %>
-							</td>
-						</tr>
-						<tr height="20px">
-							<td>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<h2><%= "#{session[:player_two]}\'s Ships:" %></h2>
-								<%= "#{session[:player_two_ships]}" %>
-							</td>
-						</tr>						
-					</table>
-				</td>
-			</tr>		
-		</table>
-	</body>
-</html>

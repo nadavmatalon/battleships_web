@@ -1,29 +1,19 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>BATTLESHIPS</title>
-		<link href="/css/style.css" rel="stylesheet">
-	</head>
-	<body>
-		<h1>BATTLESHIPS</h1>
-		<h3><%= session[:message] %><h3>
-		<% if session[:num_of_players] == 0 %>
-			<form action='/login_player_one' method='POST'>
-				<input class='text' type='text' name='text' placeholder='Name' required autofocus>
-	 			<button id="button">submit</button>
-			</form>	
-		<% elsif session[:num_of_players] == 1 %>
-			<form action='/login_player_two' method='POST'>
-				<input class='text' type='text' name='text' placeholder='Name' required autofocus>
-	 			<button id="button">submit</button>
-			</form>	
-		<% else %>
-			<form action='/setup' method='POST'>
-				 <button id="button" autofocus>continue</button>
-			</form>
-		<% end %>
-	</body>
-</html>
 
-
+<div class="buttons-container">
+	<form action='/' method='POST'>
+	 	<button class="button" id="start-button" autofocus>Start</button>
+	</form>
+</div>
+<div class="preview-grid">
+	<input class="legend color-white" type='button' value=' ' disabled>
+	<% for i in 1..10 %>
+		<input class="legend color-white" type='button' value="<%= i %>" disabled>
+	<% end %><br/>
+	<% for i in "A".."J" %>		
+		<input class="legend color-white" type='button' value="<%= i %>" disabled>
+		<% for j in 1..10 %>
+			<input class='coord' type='button' value="<%= i.to_s+j.to_s %>" disabled>		
+		<% end %><br/>
+	<% end %><br/>
+</div>
 
