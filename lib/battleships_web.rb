@@ -17,13 +17,15 @@ get '/' do
 	session[:num_of_players] == 0
 	session[:player_one] = ""
 	session[:player_two] = ""
+	session[:player_one_ships] = ""
+	session[:player_two_ships] = ""
 	session[:current_player_done] = false
-		session[:message]= "Hello, click start to begin"
+	session[:message]= "\n\nHello, click start to begin"
 	erb :index
 end
 
 post '/' do
-	session[:message]= "Player One, please enter your name"
+	session[:message]= "\n\nPlayer One, please enter your name"
 	erb :login
 end
 
@@ -31,7 +33,7 @@ post '/login_player_one' do
 	session[:player_one] = params[:text]
 	session[:num_of_players] += 1
 	set_player_name(player_one, (session[:player_one]).to_s)
-	session[:message]= "Player Two, please enter your name"
+	session[:message]= "\n\nPlayer Two, please enter your name"
 	erb :login
 end
 
@@ -42,15 +44,14 @@ post '/login_player_two' do
 		set_player_name(player_two, (session[:player_two]).to_s)
 		redirect '/setup'
 	else
-		session[:message]= "Players names can't be identical, please try again"
+		session[:message]= "\n\nPlayers names can't be identical, please try again"
 		erb :login
 	end
 end
 
 get '/setup' do
 	if session[:num_of_players] == 2
-		session[:message]= "Welcome #{session[:player_one]} and #{session[:player_two]}, 
-							let's set up the boards!"
+		session[:message]= "\n\nWelcome #{session[:player_one]} and #{session[:player_two]}, let's set up the boards!"
 		erb :login
 	else
 		redirect '/'
@@ -66,64 +67,61 @@ get '/setup_player_one' do
 		when 0
 			session[:current_ship] = :battleship
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, Your first ship is a Battleship!\n
-									 To place it click on 4 consequtive squares and then hit 'Submit'"			
-			end						 
+				session[:message] = "#{current_player.name}, Your first ship is a Battleship!\nTo place it on the board, click on 4 consequtive squares and then hit 'Submit'"
+			end
 
 		when 1
 			session[:current_ship] = :cruiser
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, well done! Now place your First Cruiser\n
-									 by clicking on 3 consequtive squares"
+				session[:message] = "Well done! Now place a Cruiser\nA Cruiser covers 3 consequtive squares - as before, click on the locations you like and hit 'Submit'"
 			end
 		when 2
 			session[:current_ship] = :cruiser
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, that's awesome! Do the same to place your Second Cruiser\n"
+				session[:message] = "#{current_player.name}, that's awesome!\nNow do the same for your second Cruiser"
 			end
 		when 3
 			session[:current_ship] = :destroyer
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, it's time for Destroyers! To place your First Destroyer\n
-									 click on 2 consequtive squares and then hit 'Submit'"
+				session[:message] = "#{current_player.name}, it's time for Destroyers!\nThis time click on 2 consequtive squares to place your first Destroyer and hit 'Submit'"
 			end
 		when 4
 			session[:current_ship] = :destroyer
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, great! Now place your Second Destroyer\n"
+				session[:message] = "#{current_player.name}, great job!\nNow place your second Destroyer"
 			end
 		when 5
 			session[:current_ship] = :destroyer
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, beautiful! Go on and place your Third Destroyer\n"
+				session[:message] = "That was beautifully done!\nTo comelete the set go ahead and place your third Destroyer"
 			end
 		when 6
 			session[:current_ship] = :submarine
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, here come Submarines! To place your First Submarine\n
-									 select a single square and then hit 'Submit'"
+				session[:message] = "#{current_player.name}, we're going underwater!\nTo place your first Submarine select a single square and then hit 'Submit'"
 			end
 		when 7
 			session[:current_ship] = :submarine
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, what a setup! Please choose where to place your Second Submarine\n"
+				session[:message] = "#{current_player.name}, what an amazing setup!\nPlease choose where to place your second Submarine"
 			end
 		when 8
 			session[:current_ship] = :submarine
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, nearly there! Please place your Third Submarine\n"
+				session[:message] = "#{current_player.name}, we're nearly there!\nPlease place your third Submarine"
 			end
 		when 9
 			session[:current_ship] = :submarine
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, last ship! place your Fourth Submarine and you're done!\n"
+				session[:message] = "#{current_player.name}, just one more ship to complete your armada!\nPlace your fourth Submarine and you're done!"
 			end
 	end
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	erb :setup
 end
 
 post '/place_ship' do
-
 	if session[:current_player_done] == true
 		if current_player == player_one
 			session[:current_player_done] = false
@@ -179,7 +177,7 @@ post '/place_ship' do
 			session[:setup_error] = false
 		else
 			session[:setup_error] = true
-			session[:message] = "Sorry, the #{session[:current_ship].capitalize} could not be placed at these coordinates, please try again"
+			session[:message] = "Sorry, the #{session[:current_ship].capitalize} could not be placed at the selected coordinates\nPlease try again"
 		end
 	end
 
@@ -188,11 +186,13 @@ post '/place_ship' do
 	else
 		session[:current_player_done] = true
 		if current_player == player_one
-			session[:message] = "#{current_player.name}, all done! click 'Next' and let #{other_player.name} get set!\n"
+			session[:message] = "#{current_player.name}, all done and ready!\n Please click 'Next' and let #{other_player.name} get set!"
 		else
-			session[:message] = "#{current_player.name}, all done! click 'Next' to start the game!\n"
+			session[:message] = "#{current_player.name}, all done and ready!\n Please click 'Next' to start the game!"
 		end	
 	end
+	session[:player_one_ships] = player_one_floating_ships
+	session[:player_two_ships] = player_two_floating_ships
 	erb :setup
 	redirect '/setup_player_one'
 end
@@ -200,7 +200,7 @@ end
 get '/player_turn' do
 	session[:player_one_ships] = player_one_floating_ships
 	session[:player_two_ships] = player_two_floating_ships
-	session[:message] = "#{current_player_name}, please select coordinate to attack:"
+	session[:message] = "\n\n#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
 end
 
@@ -208,7 +208,7 @@ post '/player_turn' do
 	switch_turn
 	session[:player_one_ships] = player_one_floating_ships
 	session[:player_two_ships] = player_two_floating_ships
-	session[:message] = "#{current_player_name}, please select coordinate to attack:"
+	session[:message] = "\n\n#{current_player_name}, please select coordinate to attack:"
 	erb :player_turn
 end
 
@@ -216,19 +216,23 @@ post '/player_attack' do
 	coordinate = params[:attack_coord].to_sym
 	attack_result = game.attack(coordinate)
 	if game.over?
-		session[:message]= "GAME_OVER! #{current_player_name.upcase} IS THE WINNER!"	
+		session[:message]= "GAME_OVER!\n#{current_player_name.upcase} IS THE WINNER!"	
 		redirect '/end_game'
 	else
 		if (attack_result == :hit)
 			hit_ship = attacked_ship(coordinate)
-				if hit_ship.sunk?
-					session[:sunk_ships_coordinates] = sunk_ships_coordinates
-					session[:message]= "#{current_player_name}, you sunk a #{hit_ship.class.to_s}!"	
+			if hit_ship.sunk?
+				session[:sunk_ships_coordinates] = sunk_ships_coordinates
+				if hit_ship.class.to_s == "Battleship"
+					session[:message]= "\n\n#{current_player_name}, you've just took down #{other_player_name}'s Battleship!"	
 				else
-					session[:message]= "#{current_player_name}, you hit a ship!"	
+					session[:message]= "\n\n#{current_player_name}, you totally sunk one of #{other_player_name}'s #{hit_ship.class.to_s}s!"	
 				end
+			else
+				session[:message]= "\n\n#{current_player_name}, you successfully hit one of #{other_player_name}'s ships!"	
+			end
 		else
-			session[:message]= "#{current_player_name}, nothing there!"	
+			session[:message]= "\n\nNice try, #{current_player_name}, but there's nothing there!"	
 		end
 	end
 	session[:player_one_ships] = player_one_floating_ships

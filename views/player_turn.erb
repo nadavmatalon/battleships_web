@@ -1,22 +1,25 @@
 
-<div class="play-buttons-container">
+<div class="buttons-container">
 	<form name="switch_turn" id="switch_turn" action="/player_switch_turn" method="POST">
-		<button id="button" hidden disabled>Next Move</button>
+		<button class="button" id="next-move-button" hidden disabled>Switch Turn</button>
 	</form>
 </div>
-
+<div class="player_ships player_one_ships">
+	<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
+	<% if session[:player_one_ships] != "" %>
+		<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
+			<p class="ship" ><%= ship %></p>
+		<% end %>
+	<% end %>
+</div>
 <div class="play-grid">
-		
 	<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
-
-		<input class='legend' type='button' value=" " disabled>
+		<input class="legend color-white" type='button' value=" " disabled>
 		<% for i in 1..10 %>
-			<input class='legend' type='button' value="<%= i %>" disabled>
+			<input class="legend color-white" type='button' value="<%= i %>" disabled>
 		<% end %><br/>
-
-
 		<% for i in "A".."J" %>		
-			<input class='legend' type='button' value="<%= i %>" disabled>
+			<input class="legend color-white" type='button' value="<%= i %>" disabled>
 			<% for j in "1".."10" %>
 				<% coord = (i+j).to_sym %>
 				<% if other_player.attacked_coordinates.include?(coord) %>
@@ -36,10 +39,13 @@
 		<% end %><br/>
 	</form>
 </div>
-			
-			<h2><%= "#{session[:player_one]}\'s Ships:" %></h2>
-			<%= session[:player_one_ships] %>
+<div class="player_ships player_two_ships">
+	<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
+	<% if session[:player_two_ships] != "" %>
+		<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
+			<p class="ship" ><%= ship %></p>
+		<% end %>
+	<% end %>
+</div>
 
-			<h2><%= "#{session[:player_two]}\'s Ships:" %></h2>
-			<%= "#{session[:player_two_ships]}" %>
-
+	

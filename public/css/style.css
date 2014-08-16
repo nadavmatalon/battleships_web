@@ -1,11 +1,10 @@
 
 body {
-   line-height: 22px;
-   font-family: monospace;
-   font-size: 15px;
-   letter-spacing: 0px;
-
-
+	line-height: 22px;
+	font-family: monospace;
+	font-size: 15px;
+	letter-spacing: 0px;
+	min-width: 1100px;
 }
 
 textarea:focus, input:focus{
@@ -16,57 +15,78 @@ textarea:focus, input:focus{
     outline: 0;
 }
 
+.color-grey {
+	color: rgb(175, 175,175);
+}
+
+.color-white {
+	color: white;
+}
+
 .page-title {
-	width: 80%;
-	height: 83px;
-	border: 1px solid rgb(150, 150, 150);
+	width: 100%;
+	height: 42px;
+	/*border: 1px solid rgb(150, 150, 150);*/
 	text-align: -webkit-center;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 15px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-bottom: 0px;
+	padding-top: 0px;
 }
 
-.page-title > p {
+.page-title p {
 	font-weight: 800;
 	color: blue;
 	font-size: 53px;
 	font-family: arial;
 	letter-spacing: 1px;
 	text-shadow: 1px 1px 1px black;
-	border-color: black;
-	display: block;
-	margin-top: 2px;
+/*	border: 1px solid rgb(150, 150, 150);
+*/	display: block;
 	margin-top: 30px;
+	margin-bottom: 0px;
 }
 
 .session-message-container {
-	width: 80%;
+	width: 100%;
 	height: 55px;
-	border: 1px solid rgb(150, 150, 150);
 	text-align: -webkit-center;
 	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
 }
 
-.session-message-container > p {
-	letter-spacing: -0.1px;
-	word-spacing: -0.4px;
+.session-message-container > pre {
+	letter-spacing: 0.3px;
+	word-spacing: 0.2px;
 	font-weight: 500;
+	line-height: 26px;
+	font-size: 1.15em;
+	font-family: arial;
+	margin-top: 11px;
 }
 
 .button {
-	height: 25px;
+	height: 27px;
 	width: 65px;
-	font-size: 13px;
 	color: black;
 	letter-spacing: 0.4px;
 	font-weight: 500;
+	border-radius: 3px;
+	border: 1px solid rgb(150, 150, 150);
+	background-color: rgb(200, 200, 250);
+	font-family: arial;
+	margin-top: 0px;
+	padding-top: 12px;
+	padding-bottom: 10px;
+	margin-left: 2px;
+	font-size: 14px;
+	line-height: 1px;
 }
 
 .button:hover {
-	color: orange;
+	color: white;
 }
 
 #start-button {
@@ -76,6 +96,20 @@ textarea:focus, input:focus{
 #login-button {
 	margin-top: 20px;
 }
+
+#next-move-button {
+	margin-top: 20px;
+	width: 100px;
+}
+
+.buttons-container {
+	width: 100%;
+	height: 60px;
+	/*border: 1px solid rgb(150, 150, 150);*/
+	margin-left: auto;
+	margin-right: auto;
+}
+
 
 .player-name-box {
 	width: 200px;
@@ -98,7 +132,8 @@ textarea:focus, input:focus{
 }
 
 .setup-buttons-container {
-	width: 80%;
+	width: 100%;
+	height: 65px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 5px;
@@ -108,23 +143,20 @@ textarea:focus, input:focus{
 #setup-submit-button {
 	margin-top: 20px;
 	color: black;
-	font-size: 13px;
+	font-size: 14px;
 	width: 80px;
-	height: 26px;
-	border: 1px solid rgb(150, 150, 150);
 	border-radius: 3px;
 	display: inline;
 }
 
 #setup-submit-button:hover {
-	color: orange;
+	color: white;
 }
 
 .setup-grid {
 	display: inline-table;
-	width: 80%;
-	border: 1px solid rgb(150, 150, 150);
-	padding-left: 6px;
+	width: 560px;
+	/*border: 1px solid rgb(150, 150, 150);*/
 }
 
 .setup-grid > input {
@@ -132,10 +164,48 @@ textarea:focus, input:focus{
 	margin-bottom: 1px;
 }
 
+.play-grid {
+	display: inline-table;
+	width: 560px;
+	/*border: 1px solid rgb(150, 150, 150);*/
+}
+
+.play-grid > form {
+	display: inline-table;
+}
+
+.play-grid > form > input {
+	margin-left: 1px;
+	margin-bottom: 1px;
+}
+
+.player_ships {
+	display: inline-table;
+	/*border: 1px solid rgb(150, 150, 150);*/
+	width: 200px;
+	height: 450px;
+	font-family: arial;
+	letter-spacing: 1.0px;
+	font-weight: 500;
+}
+
+.ship {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	font-size: 16px;
+}
+
+.player_ships_title {
+	font-size: 18px;
+	margin-bottom: 10px;
+	margin-top: 1px;
+	display: inline-block;
+}
+
 .main-body {
-	width: 80%;
-	min-height: 600px;
-	border: 1px solid rgb(150, 150, 150);
+	width: 100%;
+	height: 560px;
+	/*border: 1px solid rgb(150, 150, 150);*/
 	text-align: -webkit-center;
 	text-align: center;
 	margin-left: auto;
@@ -145,7 +215,6 @@ textarea:focus, input:focus{
 .legend {
 	font-size: 12px;
 	background-color: blue;
-	color: white;
 	border-width: medium;
 	padding-top: 4px;
 	width: 40px;
