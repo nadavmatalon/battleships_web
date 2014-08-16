@@ -1,8 +1,14 @@
 
 <div class="buttons-container">
-	<form name="player_turn" id="player_turn" action="/player_turn" method="POST">
+	<% if session[:game_over] == false %>
+		<form name="player_turn" id="player_turn" action="/player_turn" method="POST">
 			<button class="button" id="next-move-button" autofocus>Switch Turn</button>
-	</form>
+		</form>
+	<% else %>
+		<form name="new_game" id="new_game" action="/" method="GET">
+			<button class="button" id="new-game-button" autofocus>New Game</button>
+		</form>
+	<% end %>
 </div>
 <div class="player_ships player_one_ships">
 	<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
@@ -11,6 +17,8 @@
 		<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
 			<p class="ship" ><%= ship %></p>
 		<% end %>
+	<% else %>
+		<p class="ship" >No ships left</p>
 	<% end %>
 </div>
 <div class="play-grid">
@@ -47,6 +55,8 @@
 		<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
 			<p class="ship" ><%= ship %></p>
 		<% end %>
+	<% else %>
+		<p class="ship" >No ships left</p>
 	<% end %>
 </div>
 

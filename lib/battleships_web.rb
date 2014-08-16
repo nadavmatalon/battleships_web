@@ -21,12 +21,13 @@ get '/' do
 	session[:player_two_ships] = ""
 	session[:current_player_done] = false
 	session[:second_player_done] = false
-	session[:message]= "Welcome to Battleships!\nClick 'Start' to begin"
+	session[:game_over] = false
+	session[:message]= "Welcome to Battleships!\nclick 'Start' to begin playing"
 	erb :index
 end
 
 post '/' do
-	session[:message]= "Player One\nPlease enter your name"
+	session[:message]= "Player One\nplease enter your name"
 	erb :login
 end
 
@@ -35,10 +36,10 @@ post '/login_player_one' do
 	if session[:player_one] != ""
 		session[:num_of_players] += 1
 		set_player_name(player_one, (session[:player_one]).to_s)
-		session[:message]= "Player Two\nPlease enter your name"
+		session[:message]= "Player Two\nplease enter your name"
 		erb :login
 	else
-		session[:message]= "Sorry, names can't be blank\nPlease try again"
+		session[:message]= "Sorry, names can't be blank\nplease try again"
 		erb :login
 	end
 end
@@ -51,7 +52,7 @@ post '/login_player_two' do
 		set_player_name(player_two, (session[:player_two]).to_s)
 		redirect '/setup'
 	elsif session[:player_two] == ""
-		session[:message]= "Sorry, names can't be blank\nPlease try again"
+		session[:message]= "Sorry, names can't be blank\nplease try again"
 		erb :login
 	else
 		session[:message]= "Sorry, players names can't be identical\nplease try again"
@@ -227,20 +228,22 @@ post '/player_attack' do
 	coordinate = params[:attack_coord].to_sym
 	attack_result = game.attack(coordinate)
 	if game.over?
-		session[:message]= "GAME_OVER!\n#{current_player_name.upcase} IS THE WINNER!"	
-		redirect '/end_game'
+		session[:message]= "Game Over!\nCongradulations #{current_player_name}, you're the winner!"	
+		# redirect '/end_game'
+		session[:game_over] = true
+		erb :player_switch_turn
 	else
 		if (attack_result == :hit)
 			hit_ship = attacked_ship(coordinate)
 			if hit_ship.sunk?
 				session[:sunk_ships_coordinates] = sunk_ships_coordinates
 				if hit_ship.class.to_s == "Battleship"
-					session[:message]= "\n\n#{current_player_name}, you've just took out #{other_player_name}'s Battleship!"	
+					session[:message]= "\n\n#{current_player_name}, you totally sunk #{other_player_name}'s Battleship!"	
 				else
 					session[:message]= "\n\n#{current_player_name}, you totally sunk one of #{other_player_name}'s #{hit_ship.class.to_s}s!"	
 				end
 			else
-				session[:message]= "\n\n#{current_player_name}, you successfully hit one of #{other_player_name}'s ships!"	
+				session[:message]= "\n\n#{current_player_name}, you hit one of #{other_player_name}'s ships!"	
 			end
 		else
 			session[:message]= "\n\nNice try, #{current_player_name}, but there's nothing there!"	
