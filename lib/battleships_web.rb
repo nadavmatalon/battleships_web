@@ -188,7 +188,7 @@ post '/place_ship' do
 			session[:setup_error] = false
 		else
 			session[:setup_error] = true
-			session[:message] = "Sorry, a #{session[:current_ship].capitalize} could not be placed at the selected coordinates\nPlease try again"
+			session[:message] = "Sorry, your #{session[:current_ship]} could not be placed at the selected coordinates\nplease try again"
 		end
 	end
 
@@ -197,10 +197,10 @@ post '/place_ship' do
 	else
 		session[:current_player_done] = true
 		if current_player == player_one
-			session[:message] = "#{current_player.name}, you're all done and ready!\n Please click 'Next' and let #{other_player.name} get set!"
+			session[:message] = "#{current_player.name}, you're all done and ready!\n please click 'Next' and let #{other_player.name} get set!"
 		else
 			session[:second_player_done] = true
-			session[:message] = "#{current_player.name}, you're all done and ready!\n Please click 'Start Game' to continue!"
+			session[:message] = "#{current_player.name}, you're all done and ready!\n please click 'Start Game' to continue!"
 		end	
 	end
 	session[:player_one_ships] = player_one_floating_ships
@@ -212,7 +212,7 @@ end
 get '/player_turn' do
 	session[:player_one_ships] = player_one_floating_ships
 	session[:player_two_ships] = player_two_floating_ships
-	session[:message] = "\n\n#{current_player_name}, please select coordinate to attack:"
+	session[:message] = "#{current_player_name}\nclick on the coordinate you want to attack!"
 	erb :player_turn
 end
 
@@ -220,7 +220,7 @@ post '/player_turn' do
 	switch_turn
 	session[:player_one_ships] = player_one_floating_ships
 	session[:player_two_ships] = player_two_floating_ships
-	session[:message] = "\n\n#{current_player_name}, please select coordinate to attack:"
+	session[:message] = "#{current_player_name}\nclick on the coordinate you want to attack!"
 	erb :player_turn
 end
 
@@ -238,15 +238,15 @@ post '/player_attack' do
 			if hit_ship.sunk?
 				session[:sunk_ships_coordinates] = sunk_ships_coordinates
 				if hit_ship.class.to_s == "Battleship"
-					session[:message]= "\n\n#{current_player_name}, you totally sunk #{other_player_name}'s Battleship!"	
+					session[:message]= "#{current_player_name}\nyou totally sunk #{other_player_name}'s Battleship!"	
 				else
-					session[:message]= "\n\n#{current_player_name}, you totally sunk one of #{other_player_name}'s #{hit_ship.class.to_s}s!"	
+					session[:message]= "#{current_player_name}\nyou totally sunk one of #{other_player_name}'s #{hit_ship.class.to_s}s!"	
 				end
 			else
-				session[:message]= "\n\n#{current_player_name}, you hit one of #{other_player_name}'s ships!"	
+				session[:message]= "#{current_player_name}\nyou hit one of #{other_player_name}'s ships!"	
 			end
 		else
-			session[:message]= "\n\nNice try, #{current_player_name}, but there's nothing there!"	
+			session[:message]= "#{current_player_name}\nnice try, but there's nothing there!"	
 		end
 	end
 	session[:player_one_ships] = player_one_floating_ships
