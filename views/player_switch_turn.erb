@@ -10,54 +10,55 @@
 		</form>
 	<% end %>
 </div>
-<div class="player_ships player_one_ships">
-	<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
-	<div class="player_ships_underline"></div>
-	<% if session[:player_one_ships] != "" %>
-		<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
-			<p class="ship" ><%= ship %></p>
+<div class="page-container">
+	<div class="player_ships player_one_ships">
+		<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
+		<div class="player_ships_underline"></div>
+		<% if session[:player_one_ships] != "" %>
+			<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
+				<p class="ship" ><%= ship %></p>
+			<% end %>
+		<% else %>
+			<p class="ship" >No ships left</p>
 		<% end %>
-	<% else %>
-		<p class="ship" >No ships left</p>
-	<% end %>
-</div>
-<div class="play-grid">
-	<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
-		<input class="legend color-grey" type='button' value=" " disabled>
-		<% for i in 1..10 %>
-			<input class="legend color-grey" type='button' value="<%= i %>" disabled>
-		<% end %><br/>
-		<% for i in "A".."J" %>		
-			<input class="legend color-grey" type='button' value="<%= i %>" disabled>
-			<% for j in "1".."10" %>
-				<% coord = (i+j).to_sym %>
-				<% if other_player.attacked_coordinates.include?(coord) %>
-					<% if hit_coordinates.include?(coord) %>
-						<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?(coord) %>
-							<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
+	</div>
+	<div class="play-grid">
+		<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
+			<input class="legend color-grey" type='button' value=" " disabled>
+			<% for i in 1..10 %>
+				<input class="legend color-grey" type='button' value="<%= i %>" disabled>
+			<% end %><br/>
+			<% for i in "A".."J" %>		
+				<input class="legend color-grey" type='button' value="<%= i %>" disabled>
+				<% for j in "1".."10" %>
+					<% coord = (i+j).to_sym %>
+					<% if other_player.attacked_coordinates.include?(coord) %>
+						<% if hit_coordinates.include?(coord) %>
+							<% if !sunk_ships_coordinates.nil? && sunk_ships_coordinates.include?(coord) %>
+								<input class="attacked_sunk" name="attack_coord" type='submit' value="X" disabled>
+							<% else %>
+								<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
+							<% end %>
 						<% else %>
-							<input class="attacked_hit" name="attack_coord" type='submit' value="+" disabled>
+							<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
 						<% end %>
 					<% else %>
-						<input class="attacked_miss" name="attack_coord" type='submit' value="O" disabled>
+						<input class='coord' name="attack_coord" type='submit' value="<%= coord.to_s %>" disabled>
 					<% end %>
-				<% else %>
-					<input class='coord' name="attack_coord" type='submit' value="<%= coord.to_s %>" disabled>
-				<% end %>
+				<% end %><br/>
 			<% end %><br/>
-		<% end %><br/>
-	</form>
-</div>
-<div class="player_ships player_two_ships">
-	<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
-	<div class="player_ships_underline"></div>
-	<% if session[:player_two_ships] != "" %>
-		<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
-			<p class="ship" ><%= ship %></p>
+		</form>
+	</div>
+	<div class="player_ships player_two_ships">
+		<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
+		<div class="player_ships_underline"></div>
+		<% if session[:player_two_ships] != "" %>
+			<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
+				<p class="ship" ><%= ship %></p>
+			<% end %>
+		<% else %>
+			<p class="ship" >No ships left</p>
 		<% end %>
-	<% else %>
-		<p class="ship" >No ships left</p>
-	<% end %>
+	</div>
 </div>
-
 
