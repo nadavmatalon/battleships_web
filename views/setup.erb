@@ -2,17 +2,22 @@
 <form name="setup_grid" id="setup_grid" action='/place_ship' method='POST'>
 	<div class="buttons-container">
 		<% if session[:current_player_done] == false %>
-			<input type="submit" class="button" id="setup-submit-button" name="submit" value="Submit" onclick=""><br/>
+			<input type="submit" class="button" id="setup-submit-button" name="submit" value="Submit" autofocus onclick=""><br/>
+		<% elsif session[:second_player_done] == true %>
+			<input type="submit" class="button" id="start-game-button" name="submit" value="Start Game" autofocus onclick=""><br/>
 		<% else %>
-			<input type="submit" class="button" id="setup-submit-button" name="submit" value="Next" onclick=""><br/>
+			<input type="submit" class="button" id="setup-submit-button" name="submit" value="Next" autofocus onclick=""><br/>
 		<% end %>
 	</div>
 	<div class="player_ships player_one_ships">
 		<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
+		<div class="player_ships_underline"></div>
 		<% if session[:player_one_ships] != "" %>
 			<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
 				<p class="ship" ><%= ship %></p>
 			<% end %>
+		<% else %>
+				<p class="ship" >No ships yet</p>
 		<% end %>
 	</div>
 	<div class="setup-grid">
@@ -33,10 +38,13 @@
 	</div>
 	<div class="player_ships player_two_ships">
 		<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
+		<div class="player_ships_underline"></div>
 		<% if session[:player_two_ships] != "" %>
 			<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
 				<p class="ship" ><%= ship %></p>
 			<% end %>
+		<% else %>
+				<p class="ship" >No ships yet</p>
 		<% end %>
 	</div>
 	<input type='hidden' id='ship_type' name='ship_type' value="submarine">

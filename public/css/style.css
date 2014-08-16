@@ -79,14 +79,14 @@ textarea:focus, input:focus{
 	font-family: arial;
 	margin-top: 0px;
 	padding-top: 12px;
-	padding-bottom: 10px;
+	padding-bottom: 12px;
 	margin-left: 2px;
 	font-size: 14px;
 	line-height: 1px;
 }
 
 .button:hover {
-	color: white;
+	color: blue;
 }
 
 #start-button {
@@ -94,7 +94,7 @@ textarea:focus, input:focus{
 }
 
 #login-button {
-	margin-top: 20px;
+	height: 27px;
 }
 
 #next-move-button {
@@ -116,10 +116,12 @@ textarea:focus, input:focus{
 	height: 20px;
 	font-size: 14.2px;
 	padding-left: 2px;
-	line-height: 18px;
+	line-height: 16px;
 	margin-top: 19px;
 	display: inline-block;
 	letter-spacing: 0.3px;
+	padding-top: 0px;
+	padding-bottom: 2px;
 }
 
 #setup-button {
@@ -150,7 +152,30 @@ textarea:focus, input:focus{
 }
 
 #setup-submit-button:hover {
-	color: white;
+	color: blue;
+}
+
+.player_ships_underline {
+	height: 1px;
+	background-color: rgb(50, 50, 50);
+	width: 96px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 8px;
+	margin-bottom: 17px;
+}
+
+#start-game-button {
+	margin-top: 20px;
+	color: black;
+	font-size: 14px;
+	width: 100px;
+	border-radius: 3px;
+	display: inline;
+}
+
+#start-game-button:hover {
+	color: blue;
 }
 
 .setup-grid {
