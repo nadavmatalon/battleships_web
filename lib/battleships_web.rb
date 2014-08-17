@@ -22,7 +22,8 @@ get '/' do
 	session[:current_player_done] = false
 	session[:second_player_done] = false
 	session[:game_over] = false
-	session[:message]= "Welcome to Battleships!\nClick 'Start' to begin playing"
+	session[:error_message] = false
+		session[:message]= "Welcome to Battleships!\nClick 'Start' to begin playing"
 	erb :index
 end
 
