@@ -78,7 +78,7 @@ get '/setup_player_one' do
 		when 0
 			session[:current_ship] = :battleship
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, Your first ship is a Battleship!\nTo place it on the board, click on 4 consequtive squares and then hit 'Submit'"
+				session[:message] = "#{current_player.name}, your first ship is a Battleship!\nTo place it on the board, click on 4 consequtive squares and then hit 'Submit'"
 			end
 
 		when 1
@@ -89,7 +89,7 @@ get '/setup_player_one' do
 		when 2
 			session[:current_ship] = :cruiser
 			if session[:setup_error] == false
-				session[:message] = "#{current_player.name}, that's awesome!\nNow do the same for your second Cruiser"
+				session[:message] = "#{current_player.name}, that's awesome!\nNow select 3 squares for your second Cruiser"
 			end
 		when 3
 			session[:current_ship] = :destroyer
