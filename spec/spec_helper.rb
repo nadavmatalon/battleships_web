@@ -1,6 +1,5 @@
 require './lib/battleships_web.rb'
 require 'capybara/poltergeist'
-# Dir["./spec/support/**/*.rb"].each {|f| require f}
 
 Capybara.app = Sinatra::Application.new
 

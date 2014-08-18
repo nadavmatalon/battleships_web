@@ -74,6 +74,7 @@ describe "setup page", type: :feature, js: :true  do
 			click_button 'A4'
 		end
 		click_button 'Submit'
+		# save_and_open_page
 		expect(page).to have_content "Battleship"
 	end	
 
