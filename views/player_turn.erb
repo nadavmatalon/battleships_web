@@ -10,10 +10,10 @@
 		<div class="player_ships_underline"></div>
 		<% if session[:player_one_ships] != "" %>
 			<% array = session[:player_one_ships].split("<br/>").each do |ship| %>
-				<p class="ship" ><%= ship %></p>
+				<p class="ship"><%= ship %></p>
 			<% end %>
 		<% else %>
-			<p class="ship" >No ships left</p>
+			<p class="ship">No ships left</p>
 		<% end %>
 	</div>
 	<div class="play-grid">
@@ -48,10 +48,10 @@
 		<div class="player_ships_underline"></div>
 		<% if session[:player_two_ships] != "" %>
 			<% array = session[:player_two_ships].split("<br/>").each do |ship| %>
-				<p class="ship" ><%= ship %></p>
+				<p class="ship"><%= ship %></p>
 			<% end %>
 		<% else %>
-			<p class="ship" >No ships left</p>
+			<p class="ship">No ships left</p>
 		<% end %>
 	</div>
 </div>

@@ -1,5 +1,5 @@
 
-describe "homepage", type: :feature do
+describe "homepage", type: :feature, js: false do
 
 	before (:each) { visit "/" }
 

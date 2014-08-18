@@ -9,6 +9,8 @@ enable :sessions
 
 set :session_secret, 'information'
 
+set :logging, false
+
 get '/login' do
 	redirect '/'
 end

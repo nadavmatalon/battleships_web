@@ -1,5 +1,5 @@
 
-describe "login page", type: :feature, js: :true  do
+describe "login page", type: :feature, js: :false  do
 
 	before (:each) do 
 		visit "/"
@@ -86,7 +86,7 @@ describe "login page", type: :feature, js: :true  do
 		expect(page).to have_content "please try again"
 	end
 
-	it "should replace the \'Submit\' button with a \'Setup button after players login\'" do
+	it "should replace the \'Submit\' button with a \'Setup\' button after players login" do
 		fill_in  "player-one-name-box", with: "John"
 		click_button "Submit"
 		fill_in  "player-two-name-box", with: "Jane"
@@ -95,7 +95,7 @@ describe "login page", type: :feature, js: :true  do
 		expect(page).to have_button "Setup"
 	end
 
-	it "should the correct message after players login\'" do
+	it "should show the correct message after players login\'" do
 		fill_in  "player-one-name-box", with: "John"
 		click_button "Submit"
 		fill_in  "player-two-name-box", with: "Jane"

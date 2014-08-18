@@ -9,7 +9,7 @@ function togglestyle(element) {
 		var new_coords = coords.value.split(', ');
 		remove(new_coords, element.value);
 		coords.value = new_coords.join(', ');
-			console.log(coords.value);
+		console.log(coords.value);
 		console.log(element.className);
 	}
 }
