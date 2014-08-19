@@ -3,9 +3,13 @@ require_relative "game"
 require 'sinatra'
 
 set :views, Proc.new {File.join(root, '..', "views")}
-set :public, Proc.new {File.join(root, '..', "public")}
+set :public_dir, Proc.new {File.join(root, '..', "public")}
 
 enable :sessions
+
+set :session_secret, 'information'
+
+set :logging, false
 
 get '/login' do
 	redirect '/'
