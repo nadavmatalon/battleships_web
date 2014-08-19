@@ -145,6 +145,15 @@ describe "play grid", type: :feature  do
 			should have_button 'Switch Turn'
 		end
 
+		it "turns color of legend from grey to white after the 'Switch Turn' button is clicked" do
+			click_button 'A1'		
+			click_button 'Switch Turn'
+			within "#play-grid" do
+				should have_selector :xpath, '//input[@class="legend color-white"]', count: 21
+				should have_selector :xpath, '//input[@class="legend color-grey"]', count: 0
+			end
+		end
+
 		it "hides the 'Switch Turn' button after it's clicked" do
 			click_button 'A1'
 			click_button 'Switch Turn'

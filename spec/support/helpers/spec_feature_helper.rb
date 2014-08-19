@@ -33,17 +33,23 @@ end
 
 def sink_battleship
 	setup_game_for_play
-	2.times do
-		click_button 'A1'
-		click_button 'Switch Turn'
-	end
-	2.times do
-		click_button 'A2'
-		click_button 'Switch Turn'
-	end
-	2.times do
-		click_button 'A3'
-		click_button 'Switch Turn'
-	end
+	%w(A1 A2 A3).each { |coordinate| double_attack coordinate }
 	click_button 'A4'
 end
+
+def sink_all_ships
+	setup_game_for_play
+	("A1".."A9").each { |coordinate| double_attack coordinate }
+	double_attack "A10"
+	("B1".."B9").each { |coordinate| double_attack coordinate }
+	click_button "B10"
+end
+
+def double_attack coordinate
+	2.times do
+		click_button coordinate
+		click_button 'Switch Turn'
+	end
+end
+
+
