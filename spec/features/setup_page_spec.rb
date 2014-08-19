@@ -41,52 +41,15 @@ describe "setup page", type: :feature, js: :true  do
 			expect(page).to have_content "No ships yet"
 		end
 	end
-
-	it "contain setup grid legend" do
-		within "#setup-grid" do
-			for i in "1".."10"
-				value = "//input[@value=\'" + i + "\']"
-				expect(page).to have_xpath(value)
-			end
-			for i in "A".."J"
-				value = "//input[@value=\'" + i + "\']"
-				expect(page).to have_xpath(value)
-			end
-		end
-	end
-
-	it "contain setup grid buttons" do
-		within "#setup-grid" do
-			for i in "A".."J"
-				for j in "1".."10"
-					value = "//input[@value=\'" + i + j + "\']"
-					expect(page).to have_xpath(value)
-				end
-			end
-		end
-	end
-
-	it "setup grid buttons can be selected by clicking" do
-		within '#setup-grid' do
-			click_button 'A1'
-			click_button 'A2'
-			click_button 'A3'
-			click_button 'A4'
-		end
-		click_button 'Submit'
-		# save_and_open_page
-		expect(page).to have_content "Battleship"
-	end	
-
 end
 
 
 def login_players
 	visit "/"
 	click_button "Start"
-	fill_in  "player-one-name-box", with: "John"
+	fill_in "player-one-name-box", with: "John"
 	click_button "Submit"
-	fill_in  "player-two-name-box", with: "Jane"
+	fill_in "player-two-name-box", with: "Jane"
 	click_button "Submit"
 	click_button "Setup"
 end
