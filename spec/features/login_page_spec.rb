@@ -103,6 +103,5 @@ describe "login page", type: :feature, js: :false  do
 		expect(page).to have_content "Welcome John and Jane!"
 		expect(page).to have_content "Let's set up the boards"
 	end
-
 end
 

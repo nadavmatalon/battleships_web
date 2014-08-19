@@ -5,7 +5,7 @@
 	</form>
 </div>
 <div class="page-container">
-	<div class="player_ships player_one_ships">
+	<div class="player_ships player_one_ships" id="player-one-ships">
 		<p class="player_ships_title"><strong><%= "#{session[:player_one]}'s Armada" %></strong></p>
 		<div class="player_ships_underline"></div>
 		<% if session[:player_one_ships] != "" %>
@@ -16,7 +16,7 @@
 			<p class="ship">No ships left</p>
 		<% end %>
 	</div>
-	<div class="play-grid">
+	<div class="play-grid" id="play-grid">
 		<form name="game_grid" id="game_grid" action='/player_attack' method='POST' >
 			<input class="legend color-white" type='button' value=" " disabled>
 			<% for i in 1..10 %>
@@ -43,7 +43,7 @@
 			<% end %><br/>
 		</form>
 	</div>
-	<div class="player_ships player_two_ships">
+	<div class="player_ships player_two_ships" id="player-two-ships">
 		<p class="player_ships_title"><strong><%= "#{session[:player_two]}'s Armada" %></strong></p>
 		<div class="player_ships_underline"></div>
 		<% if session[:player_two_ships] != "" %>

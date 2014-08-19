@@ -43,18 +43,3 @@ describe "setup page", type: :feature, js: :true  do
 	end
 end
 
-
-def login_players
-	visit "/"
-	click_button "Start"
-	fill_in "player-one-name-box", with: "John"
-	click_button "Submit"
-	fill_in "player-two-name-box", with: "Jane"
-	click_button "Submit"
-	click_button "Setup"
-end
-
-
-
-
- 

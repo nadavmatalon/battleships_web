@@ -1,5 +1,6 @@
 require './lib/battleships_web.rb'
 require 'capybara/poltergeist'
+Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
 
 Capybara.app = Sinatra::Application.new
 

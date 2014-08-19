@@ -22,6 +22,5 @@ describe "homepage", type: :feature, js: false do
 	it "should have the preview picture of a battleship" do
 		expect(page).to have_css "#battleship_pic"
 	end
-
 end
 
