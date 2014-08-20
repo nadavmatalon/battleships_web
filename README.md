@@ -60,10 +60,10 @@ different kinds (and without letting the other player peak!)
 
 Each player set of ships consists of:
 
-* 1 x Battleship    (covers 4 squares)
-* 2 x Cruisers      (each covering 3 squares)
-* 3 x Destroyers    (each covering 2 squares)
-* 4 x Submarines    (each covering 1 square)
+* 1 x Battleship      (covers 4 squares)
+* 2 x Cruisers        (each covering 3 squares)
+* 3 x Destroyers      (each covering 2 squares)
+* 4 x Submarines      (each covering 1 square)
 
 (on-screen instructions are given on how to place ships on the board)
 
