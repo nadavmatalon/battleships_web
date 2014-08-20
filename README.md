@@ -55,7 +55,7 @@ A live version of the app can be found at:
 
 http://battleships-web.herokuapp.com
 
-As I'm using Heroku's free hosting service, the app may take a bit of time to upload 
+As I'm using Heroku's free hosting service, the app may take a bit of time to upload<br/>
 (Heroku's giros take time to wake up...), so please be patient.
 
 
