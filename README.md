@@ -65,7 +65,9 @@ Each player set of ships consists of:
 * 3 x __Destroyers__        (each covering 2 squares)
 * 4 x __Submarines__        (each covering 1 square)
 
-(on-screen instructions are given on how to place ships on the board)
+Ships must be placed either in a vetical or horizontal position.
+
+(additional on-screen instructions are given regarding placement of ships on the board)
 
 After the boards are set, the players take turns  attacking a single 
 coordinate (square) on the other player's board in each turn, so as
