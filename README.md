@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-* [Screenshots](#screenshot)
+* [Screenshots](#screenshots)
 * [General Description](#general-description)
 * [See it Live on Heroku](#see-it-live-on-heroku)
 * [Browsers](#browsers)
@@ -10,7 +10,7 @@
 * [License](#license)
 
 
-## Screenshots
+##Screenshots
 
 <table>
 	<tr>
@@ -41,16 +41,16 @@
 	</tr>
 </table>
 
-##  General Description
+##General Description
 
 
-##  See it Live on Heroku
+##See it Live on Heroku
 
 A live version of the app can be found at:<br>
 http://battleships-web.herokuapp.com
 
 
-##  Browsers
+##Browsers
 
 For the best user experience, please use:
 
@@ -63,7 +63,7 @@ The app was also tested on, however these browsers may show flickering on transi
 * Google Chrome (36.0)
 
 
-##  Testing
+##Testing
 
 Tests were written with Rspec (3.0.4) & Capybara (2.4.1)
 
@@ -76,7 +76,7 @@ $ rspec
 ~~~
 
 
-##  License
+##License
 
 <p>Released under the <a href="http://www.opensource.org/licenses/MIT">MIT license</a>.</p>
 
