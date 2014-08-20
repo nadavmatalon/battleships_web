@@ -56,11 +56,13 @@ For the best user experience, please use:
 
 * __Mozilla Firefox__ (31.0 or later)
 
-The app was also tested on, however these browsers may show flickering on transitions:
+The app was also tested on:
 
 * Apple Safari (7.0.5)
 
 * Google Chrome (36.0)
+
+However these browsers may show flickering on transitions.
 
 
 ##Testing
