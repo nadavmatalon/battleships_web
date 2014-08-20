@@ -41,13 +41,21 @@
 	</tr>
 </table>
 
+
 ##General Description
+
+
+
+
 
 
 ##See it Live on Heroku
 
 A live version of the app can be found at:<br>
 http://battleships-web.herokuapp.com
+
+As I'm using Heroku's free hosting service, the app may take a bit of time to upload 
+(Heroku's giros take time to wake up...), so please be patient.
 
 
 ##Browsers
@@ -63,6 +71,9 @@ The app was also tested on:
 * Google Chrome (36.0)
 
 However these browsers may show flickering on transitions.
+
+Also, as I'm using Heroku's free hosting service, the app may take a bit of time to upload 
+(Heroku's giros take time to wake up...), so please be patient.
 
 
 ##Testing
