@@ -47,17 +47,15 @@
 
 The game of 'Battleships' written in Ruby & JavaScript according to TDD.
 
-For general information please see:
-
-http://en.wikipedia.org/wiki/Battleship_(game)
+For general information please see: [Wikipedia on Battleships](http://en.wikipedia.org/wiki/Battleship_(game))
 
 
 ##How to Play
 
-The goal of Battleships is to sink all of the other player's ships before<br/>
+The goal of Battleships is to sink all of the other player's ships before
 they manage to sink your own ships. 
 
-The game begins with each player setting up their own board with 10 ships of <br/>
+The game begins with each player setting up their own board with 10 ships of
 different kinds (and without letting the other player peak!)
 
 The set of ships of each player consists of:
