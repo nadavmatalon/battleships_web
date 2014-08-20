@@ -4,6 +4,7 @@
 
 * [Screenshots](#screenshots)
 * [General Description](#general-description)
+* [How to Play](#how-to-play)
 * [See it Live on Heroku](#see-it-live-on-heroku)
 * [Browsers](#browsers)
 * [Testing](#testing)
@@ -42,11 +43,43 @@
 </table>
 
 
-##General Description
+##Description
+
+The game of 'Battleships' written in Ruby & JavaScript according to TDD.
+
+For general description and rules of the game please see:
+
+http://en.wikipedia.org/wiki/Battleship_(game)
 
 
+##How to Play
 
+The goal of Battleships is to sink all of the other player's ships before they 
+manage to sink your ships. 
 
+The game begins with each player setting up their own board with 10 ships of different kinds 
+(and without letting the other player peak!). 
+
+The set of ships consists of:
+
+* One Battleships (covers 4 squares)
+* Two Cruisers (cover 3 squares each)
+* Three Destroyers (covers 2 squares each)
+* Four Submarines (cover 1 square each)
+
+(on-screen instructions are given on how to place ships on the board)
+
+After the boards are set, the players take turns  attacking a single 
+coordinate (square) on the other player's board in each turn, so as
+to try and hit the other player's ships. 
+
+If the attack is successful the game issues a 'ship hit' message.
+
+When all the coordinates of a given ship are hit, it sinks and the game issues a 
+'ship sunk' message (it will also remove that ship from the other player's ship list
+so players can keep track of how many ships each player has at any given moment).
+
+The player who manages to sink all of the other player's ships is the winner.
 
 
 ##See it Live on Heroku
