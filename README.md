@@ -55,15 +55,15 @@ For general information please see: [Wikipedia on Battleships](http://en.wikiped
 The goal of Battleships is to sink all of the other player's ships before
 they manage to sink your own ships. 
 
-The game begins with each player setting up their own board with 10 ships of
+The game begins with each player setting up their own board with a set of 10 ships of
 different kinds (and without letting the other player peak!)
 
-The set of ships of each player consists of:
+Each player set of ships consists of:
 
-* 1 x Battleships   (covers 4 squares)
-* 2 x Cruisers      (cover 3 squares each)
-* 3 x Destroyers    (cover 2 squares each)
-* 4 x Submarines    (cover 1 square each)
+* 1 x Battleship    (covers 4 squares)
+* 2 x Cruisers      (each covering 3 squares)
+* 3 x Destroyers    (each covering 2 squares)
+* 4 x Submarines    (each covering 1 square)
 
 (on-screen instructions are given on how to place ships on the board)
 
