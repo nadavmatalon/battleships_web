@@ -43,7 +43,7 @@
 </table>
 
 
-##Description
+##General Description
 
 The game of 'Battleships' written in Ruby & JavaScript according to TDD.
 
