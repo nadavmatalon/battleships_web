@@ -45,17 +45,18 @@
 
 ##General Description
 
-The game of 'Battleships' written in Ruby & JavaScript according to TDD.
+The game of __Battleships__ written in [Ruby](https://www.ruby-lang.org/en/) and [JavaScript](http://en.wikipedia.org/wiki/JavaScript) according to [TDD](http://en.wikipedia.org/wiki/Test-driven_development) (testing with [Rspec](http://rspec.info/) and [Capybara](https://github.com/jnicklas/capybara)).
 
-For general information please see: [Wikipedia on Battleships](http://en.wikipedia.org/wiki/Battleship_(game))
+For more information about the game see: [Wikipedia on Battleships](http://en.wikipedia.org/wiki/Battleship_(game))
 
 
 ##How to Play
 
-The goal of Battleships is to sink all of the other player's ships before
-they manage to sink your own ships. 
+The game of __Battleships__ is typiclly played with 2 players.
 
-The game begins with each player setting up their own board with a set of 10 ships of
+The goal of each player is to be the first to sink all of the other player's ships. 
+
+The game begins with each player setting up their own board with a collection of 10 ships of
 different kinds (and without letting the other player peak!)
 
 Each player set of ships consists of:
@@ -65,7 +66,7 @@ Each player set of ships consists of:
 * 3 x __Destroyers__        (each covering 2 squares)
 * 4 x __Submarines__        (each covering 1 square)
 
-Ships must be placed either in a vetical or horizontal position.
+Each ship must be placed either in a vetical or horizontal position.
 
 (additional on-screen instructions are given regarding placement of ships on the board)
 
@@ -111,14 +112,15 @@ However these browsers may show flickering on transitions.
 
 ##Testing
 
-Tests were written with Rspec (3.0.4) & Capybara (2.4.1)
+Tests were written with [Rspec](http://rspec.info/) (3.0.4) and [Capybara](https://github.com/jnicklas/capybara) (2.4.1).
 
 The tests cover both back-end logic and front-end functionality.
 
 To run the tests in terminal: 
 
 ~~~ bash
-$ rspec
+$> ch battleships_web
+$> rspec
 ~~~
 
 
