@@ -52,7 +52,7 @@ For more information about the game see: [Wikipedia on Battleships](http://en.wi
 
 ##How to Play
 
-The game of __Battleships__ is typiclly played with 2 players.
+The game of __Battleships__ is typically played with 2 players.
 
 The goal of each player is to be the first to sink all of the other player's ships. 
 
