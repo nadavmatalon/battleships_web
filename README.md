@@ -1,9 +1,13 @@
 #Battleships: Web Version
 
+##Makers Academy | Week 6 | Challenge
+
+
 ## Table of Contents
 
 * [Screenshots](#screenshots)
 * [General Description](#general-description)
+* [Guidelines](#guidelines)
 * [How to Play](#how-to-play)
 * [See it Live on Heroku](#see-it-live-on-heroku)
 * [Browsers](#browsers)
@@ -45,9 +49,46 @@
 
 ##General Description
 
-The game of __Battleships__ written in [Ruby](https://www.ruby-lang.org/en/) and [JavaScript](http://en.wikipedia.org/wiki/JavaScript) according to [TDD](http://en.wikipedia.org/wiki/Test-driven_development) (testing with [Rspec](http://rspec.info/) and [Capybara](https://github.com/jnicklas/capybara)).
+This repo contians my answer to __Week 6 Friday Challange__ as part 
+of the course at [Makers Academy](http://www.makersacademy.com/).
 
-For more information about the game see: [Wikipedia on Battleships](http://en.wikipedia.org/wiki/Battleship_(game))
+The first working iteration of this app was written over a weekend, 
+and in later iterations I've refactored both the back-end logic 
+and front-end interface.
+
+The app consists of the game of __Battleships__ written in 
+[Ruby](https://www.ruby-lang.org/en/) &amp; 
+[JavaScript](http://en.wikipedia.org/wiki/JavaScript) 
+according to [TDD](http://en.wikipedia.org/wiki/Test-driven_development) 
+(testing with [Rspec](http://rspec.info/) &amp; 
+[Capybara](https://github.com/jnicklas/capybara)).
+
+For more information about the game see: 
+[Wikipedia on Battleships](http://en.wikipedia.org/wiki/Battleship_(game))
+
+
+##Guidelines
+
+* The task is to write a web based battleship game in 
+  [Sinatra](http://www.sinatrarb.com/) using your knowledge and googling skills
+* When a potential player goes to the website the player will be prompted for a 
+  name to register for a new game (only if there are less than two players already 
+  registered)
+* Once registered you will be able to place your ships (you will need to show a 
+  grid and allow the players to place their ships on it; the types and numbers of 
+  ships allowed are the same for each player)
+* After the ships have been positioned, the game proceeds in a series of rounds. 
+  In each round, each player takes a turn to announce a target square in the 
+  opponent's grid which is to be shot at. The opponent announces whether or not 
+  the square is occupied by a ship, and if it is a "hit" they mark this on their 
+  own primary grid. The attacking player notes the hit or miss on their own 
+  "tracking" grid, in order to build up a picture of the opponent's fleet
+* When all of the squares of a ship have been hit, the ship is sunk, and the ship's 
+  owner announces this (e.g. "You sank my battleship!"). If all of a player's 
+  ships have been sunk, the game is over and their opponent wins
+* You will get extra credit if the game looks beautiful
+* If you want a challenge over the challenge (we haven’t covered any of this): 
+  Deploy your sinatra application on [Heroku](http://www.heroku.com/)
 
 
 ##How to Play
@@ -89,9 +130,10 @@ The player who manages to sink all of the other player's ships is the winner.
 
 A live version of the app can be found at:
 
-http://battleships-web.herokuapp.com
+[Battleships on Heroku](http://battleships-web.herokuapp.com)
 
-As I'm using Heroku's free hosting service, the app may take a bit of time to upload<br/>
+As I'm using Heroku's free hosting service, the app may take a bit of time 
+to upload<br/>
 (Heroku's giros take time to wake up...), so please be patient.
 
 
@@ -103,25 +145,26 @@ For the best user experience, please use:
 
 The app was also tested on:
 
-* Apple Safari (7.0.5)
+* __Apple Safari__ (7.0.5)
 
-* Google Chrome (36.0)
+* __Google Chrome__ (36.0)
 
 However these browsers may show flickering on transitions.
 
 
 ##Testing
 
-Tests were written with [Rspec](http://rspec.info/) (3.0.4) and [Capybara](https://github.com/jnicklas/capybara) (2.4.1).
+Tests were written with [Rspec](http://rspec.info/) (3.0.4) &amp; 
+[Capybara](https://github.com/jnicklas/capybara) (2.4.1).
 
 The tests cover both back-end logic and front-end functionality.
 
 To run the tests in terminal: 
 
-~~~ bash
+```bash
 $> ch battleships_web
 $> rspec
-~~~
+```
 
 
 ##License
