@@ -2,12 +2,14 @@
 
 ##Makers Academy | Week 6 | Challenge
 
+[![Code Climate](https://codeclimate.com/github/nadavmatalon/battleships_web/badges/gpa.svg)](https://codeclimate.com/github/nadavmatalon/battleships_web)
 
 ## Table of Contents
 
 * [Screenshots](#screenshots)
 * [General Description](#general-description)
 * [Guidelines](#guidelines)
+* [How to Install](#how-to-install)
 * [How to Play](#how-to-play)
 * [See it Live on Heroku](#see-it-live-on-heroku)
 * [Browsers](#browsers)
@@ -91,6 +93,23 @@ For more information about the game see:
   Deploy your sinatra application on [Heroku](http://www.heroku.com/)
 
 
+##How to Install
+
+To install the apo locally, clone the repo and run:
+
+```bash
+$> ch battleships_web
+$> bundle instsll
+$> shotgun
+```
+
+Then open the browser of your choice and go to:
+
+```
+http://localhost:9393/
+```
+
+
 ##How to Play
 
 The game of __Battleships__ is typically played with 2 players.
@@ -159,7 +178,7 @@ Tests were written with [Rspec](http://rspec.info/) (3.0.4) &amp;
 
 The tests cover both back-end logic and front-end functionality.
 
-To run the tests in terminal: 
+To run the tests in terminal, clone the repo and run: 
 
 ```bash
 $> ch battleships_web
