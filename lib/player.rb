@@ -15,7 +15,7 @@ class Player
 		@name
 	end
 
-	def set_player_name new_name
+	def set_name new_name
 		@name = new_name
 	end
 
@@ -50,7 +50,11 @@ class Player
 	def floating_ships
 		board.floating_ships
 	end
-	
+
+	def floating_ships_list
+		board.floating_ships
+	end
+
 	def sunk_ships_count
 		sunk_ships.count
 	end
@@ -79,7 +83,4 @@ class Player
 		board.sunk_ships_coordinates
 	end
 end
-
-
-
 

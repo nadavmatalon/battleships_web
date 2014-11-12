@@ -16,19 +16,19 @@ class Coordinates
 
 	def same_row_or_column?
 		return true if locations.count <= 2
-		check_value = false
-		locations_array = locations.map do |coordinate|
-			coordinate.location	
-		end			 
-		row_array = locations_array.map do |location|
-			location.slice(0)
-		end
-		column_array = locations_array.map do |location|
-			location.slice(1..2)
-		end
-		row_array.uniq!
-		column_array.uniq!
-		row_array.count == 1 || column_array.count == 1
+		same_row? || same_column?
+	end
+
+	def locations_array
+		locations.map { |coordinate| coordinate.location.to_s }
+	end
+
+	def same_row?
+		locations_array.map { |location| location.slice(0) }.uniq!.to_a.count == 1
+	end
+
+	def same_column?
+		locations_array.map { |location| location.slice(1..2) }.uniq!.to_a.count == 1
 	end
 
 	def correct_length?
@@ -42,11 +42,7 @@ class Coordinates
 	end
 
 	def sequence
-		location_pairs.map {|coord_a, coord_b| sequential_coordinates?(coord_a, coord_b) }
-	end
-
-    def sequential_coordinates?(coord_a, coord_b)
-    	coord_b.convert_to_number - coord_a.convert_to_number == 1
+		location_pairs.map { |coord_a, coord_b| coord_b.convert_to_number - coord_a.convert_to_number == 1 }
 	end
 
 	def location_pairs
