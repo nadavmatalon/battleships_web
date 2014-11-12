@@ -35,6 +35,10 @@ class Ship
 	def coordinates_list
 		coordinates.into_array
 	end
+
+	def matching? coordinate
+		(coordinates_list & [coordinate]).any?
+	end
 end
 
 

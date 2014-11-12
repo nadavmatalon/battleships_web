@@ -2,8 +2,8 @@ require_relative "game"
 
 require 'sinatra'
 
-set :views, Proc.new {File.join(root, '..', "views")}
-set :public_dir, Proc.new {File.join(root, '..', "public")}
+set :views, Proc.new { File.join(root, '..', "views") }
+set :public_dir, Proc.new { File.join(root, '..', "public") }
 
 enable :sessions
 
@@ -16,7 +16,7 @@ get '/login' do
 end
 
 get '/' do
-	session[:game]= create_game
+	session[:game] = Game.new
 	session[:num_of_players] = 0
 	session[:num_of_players] == 0
 	session[:player_one] = ""
@@ -40,7 +40,7 @@ post '/login_player_one' do
 	session[:player_one] = params[:text]
 	if session[:player_one] != ""
 		session[:num_of_players] += 1
-		set_player_name(player_one, (session[:player_one]).to_s)
+		player_one.set_name ((session[:player_one]).to_s)
 		session[:message]= "Player Two\nplease enter your name"
 		erb :login
 	else
@@ -54,7 +54,7 @@ post '/login_player_two' do
 	session[:player_two]= params[:text]
 	if session[:player_two] != session[:player_one] && session[:player_two] != ""
 		session[:num_of_players] += 1
-		set_player_name(player_two, (session[:player_two]).to_s)
+		player_two.set_name ((session[:player_two]).to_s)
 		redirect '/setup'
 	elsif session[:player_two] == ""
 		session[:message]= "Sorry, names can't be blank\nplease try again"
@@ -234,7 +234,6 @@ post '/player_attack' do
 	attack_result = game.attack(coordinate)
 	if game.over?
 		session[:message]= "Game Over!\nCongradulations #{current_player_name}, you're the winner!"	
-		# redirect '/end_game'
 		session[:game_over] = true
 		erb :player_switch_turn
 	else
@@ -281,10 +280,6 @@ def current_player_occupied_coordinates
 	game.current_player.occupied_coordinates
 end
 
-def create_game
-	Game.new
-end
-
 def game
 	session[:game]
 end
@@ -325,20 +320,11 @@ def place ship
 	game.place(ship)
 end
 
-def name_of ship_type
-	ship_type.to_s.capitalize
-end
-
 def play_loop_until_game_over
 	while !game.over?
 		play_turn
 		switch_turn
 	end
-end
-
-def play_turn
-	# coordinate = get_attack_coordinate_from(current_player)
-	# print attack_result_message(get_attack_result(coordinate))
 end
 
 def get_attack_result(coordinate)
@@ -354,15 +340,11 @@ def attacked_ship coordinate
 end
 
 def player_one_floating_ships
-	floating_ships = game.player_one_floating_ships.flatten.map {|ship| ship.class.to_s}
-	floating_ships.sort!
-	floating_ships.join("<br/>")
+	game.player_one.floating_ships.flatten.map {|ship| ship.class.to_s}.sort!.join("<br/>")
 end
 
 def player_two_floating_ships
-	floating_ships = game.player_two_floating_ships.flatten.map {|ship| ship.class.to_s}
-	floating_ships.sort!
-	floating_ships.join("<br/>")
+	game.player_two.floating_ships.flatten.map {|ship| ship.class.to_s}.sort!.join("<br/>")
 end
 
 def sunk_ships
@@ -375,15 +357,5 @@ end
 
 def winner_name
 	game.winner_name
-end
-
-def grid_array
-	coord_str = ""
-	for i in "A".."J"
-		for j in "1".."10"
-			string += i+j+", "
-		end
-	end
-	string.split(', ')
 end
 

@@ -5,48 +5,23 @@ class Game
 SHIPS_TO_PLACE = 10
 SUNK_SHIPS_TO_WIN = 10
 
+	attr_reader :player_one, :player_two
+
 	def initialize
-		set_up_players
+		@player_one = Player.new
+		@player_two = Player.new
+		players.push(@player_one, @player_two)
 		@current_turn = player_one
-	end
-
-	def set_up_players
-		create_players
-		add_players_to_game
-	end
-
-	def create_players
-		create_player_one
-		create_player_two
 	end
 
 	def players
 		@players ||= []
 	end
 
-	def player_one
-		@player_one
+	def set_player_name new_name
+		current_player.set_name new_name
 	end
 
-	def player_two
-		@player_two
-	end
-
-	def create_player_one
-		@player_one = Player.new
-	end
-
-	def create_player_two
-		@player_two = Player.new
-	end
-
-	def set_player_name player, new_name
-		player.set_player_name(new_name)
-	end
-
-	def add_players_to_game
-		players.push(player_one, player_two)
-	end
 
 	def current_turn
 		@current_turn
@@ -78,9 +53,7 @@ SUNK_SHIPS_TO_WIN = 10
 	end
 
 	def place ship
-		ship_count = current_player.ship_count
 		current_player.place(ship)
-		current_player.ship_count == ship_count + 1
 	end
 
 	def attack coordinate
@@ -127,6 +100,3 @@ SUNK_SHIPS_TO_WIN = 10
 		other_player.sunk_ships_coordinates
 	end
 end
-
-
-
