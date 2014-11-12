@@ -61,11 +61,6 @@ describe Game do
 		expect(game.current_turn).to eq game.player_two
 	end
 
-	it "knows if a ship has been successfully placed" do
-		expect(game.place(sub1)).to be true
-		expect(game.place(sub1)).to be false
-	end
-
 	it "knows if it's not over" do
 		expect(game.over?).to be false
 	end
@@ -90,8 +85,10 @@ describe Game do
 	end
 
 	it "knows who won" do
-		game.set_player_name game.player_one, "Player One"
-		game.set_player_name game.player_two, "Player Two"
+		game.set_player_name "Player One"
+		game.switch_turn
+		game.set_player_name "Player Two"
+		game.switch_turn
 		game.place(battleship)
 		game.place(cruiser1)
 		game.place(cruiser2)
